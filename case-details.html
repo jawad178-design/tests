@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تفاصيل القضية - نظام مسار القانوني</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="legal-case-styles.css">
+    <style>
+        /* أنماط إضافية لصفحة تفاصيل القضية */
+        .case-detail-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .case-header {
+            background: var(--gradient-primary);
+            color: white;
+            padding: 2rem;
+            border-radius: var(--border-radius-lg);
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-medium);
+        }
+        
+        .case-header-content {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 2rem;
+            align-items: center;
+        }
+        
+        .case-basic-info h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .case-meta {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .case-actions {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .action-btn {
+            padding: 0.75rem 1.5rem;
+            border: 2px solid rgba(255,255,255,0.3);
+            background: rgba(255,255,255,0.1);
+            color: white;
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .action-btn:hover {
+            background: rgba(255,255,255,0.2);
+            border-color: rgba(255,255,255,0.5);
+        }
+        
+        .tabs-container {
+            background: white;
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-medium);
+            overflow: hidden;
+            margin-bottom: 2rem;
+        }
+        
+        .tabs-nav {
+            display: flex;
+            background: var(--light-gray);
+            border-bottom: 1px solid var(--border-gray);
+        }
+        
+        .tab-button {
+            padding: 1.5rem 2rem;
+            border: none;
+            background: none;
+            color: var(--medium-gray);
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            transition: var(--transition);
+            font-size: 1rem;
+            font-weight: 500;
+            position: relative;
+        }
+        
+        .tab-button.active {
+            color: var(--primary-blue);
+            border-bottom-color: var(--primary-blue);
+            background: white;
+        }
+        
+        .tab-button:hover {
+            color: var(--primary-blue);
+            background: rgba(30, 60, 114, 0.05);
+        }
+        
+        .tab-content {
+            min-height: 500px;
+        }
+        
+        .tab-panel {
+            display: none;
+            padding: 2rem;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .tab-panel.active {
+            display: block;
+        }
+        
+        .session-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+        
+        .session-table th,
+        .session-table td {
+            padding: 1rem;
+            text-align: right;
+            border-bottom: 1px solid var(--border-gray);
+        }
+        
+        .session-table th {
+            background: var(--light-gray);
+            font-weight: 600;
+            color: var(--primary-blue);
+        }
+        
+        .add-session-btn {
+            background: var(--success-color);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-size: 1rem;
+            margin-bottom: 2rem;
+            transition: var(--transition);
+        }
+        
+        .add-session-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-medium);
+        }
+        
+        .document-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .document-card {
+            background: var(--light-gray);
+            padding: 1.5rem;
+            border-radius: var(--border-radius-lg);
+            text-align: center;
+            transition: var(--transition);
+            border: 2px dashed var(--border-gray);
+        }
+        
+        .document-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-medium);
+        }
+        
+        .upload-area {
+            border: 2px dashed var(--primary-blue);
+            background: rgba(30, 60, 114, 0.05);
+            color: var(--primary-blue);
+            cursor: pointer;
+        }
+        
+        .history-timeline {
+            position: relative;
+            padding: 2rem 0;
+        }
+        
+        .history-timeline::before {
+            content: '';
+            position: absolute;
+            right: 2rem;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--border-gray);
+        }
+        
+        .history-item {
+            position: relative;
+            padding: 1.5rem 0 1.5rem 4rem;
+            margin-bottom: 2rem;
+        }
+        
+        .history-item::before {
+            content: '';
+            position: absolute;
+            right: 1.5rem;
+            top: 2rem;
+            width: 12px;
+            height: 12px;
+            background: var(--primary-blue);
+            border-radius: 50%;
+            border: 3px solid white;
+            box-shadow: 0 0 0 3px var(--border-gray);
+        }
+        
+        .history-content {
+            background: white;
+            padding: 1.5rem;
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-small);
+        }
+        
+        .history-meta {
+            color: var(--medium-gray);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        @media (max-width: 768px) {
+            .case-header-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .tabs-nav {
+                flex-wrap: wrap;
+            }
+            
+            .tab-button {
+                padding: 1rem;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- الهيدر مع الشعار والتنقل -->
+    <header class="header">
+        <div class="container">
+            <div class="logo-container">
+                <div class="logo">
+                    <img src="file000000004b0862438e4aefa6c2e7e176.png" alt="شعار النظام" class="logo-img">
+                </div>
+                <div class="logo-text">
+                    <h1 class="company-name">نظام مسار القانوني</h1>
+                    <p class="company-subtitle">نظام إدارة القضايا والاستشارات القانونية</p>
+                </div>
+            </div>
+            <nav class="top-nav">
+                <a href="legal-case-management.html" class="btn outline">
+                    <i class="fas fa-arrow-right"></i> العودة للقائمة الرئيسية
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- المحتوى الرئيسي -->
+    <main class="case-detail-container" style="margin-top: 160px;">
+        <!-- رأس القضية -->
+        <div class="case-header">
+            <div class="case-header-content">
+                <div class="case-basic-info">
+                    <h1>القضية رقم: 2025-109</h1>
+                    <div class="case-meta">
+                        <span><i class="fas fa-user"></i> محمد أحمد الخالدي</span>
+                        <span><i class="fas fa-building"></i> المحكمة العمالية - الدائرة 4</span>
+                        <span class="status active"><i class="fas fa-circle"></i> نشطة</span>
+                    </div>
+                    <p><strong>نوع القضية:</strong> دعوى عمالية - مطالبة مالية</p>
+                </div>
+                <div class="case-actions">
+                    <button class="action-btn" onclick="editCase()">
+                        <i class="fas fa-edit"></i> تعديل
+                    </button>
+                    <button class="action-btn" onclick="assignCase()">
+                        <i class="fas fa-share"></i> إحالة
+                    </button>
+                    <button class="action-btn" onclick="archiveCase()">
+                        <i class="fas fa-archive"></i> أرشفة
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- التبويبات -->
+        <div class="tabs-container">
+            <nav class="tabs-nav">
+                <button class="tab-button active" onclick="showTab('overview')">
+                    <i class="fas fa-info-circle"></i> نظرة عامة
+                </button>
+                <button class="tab-button" onclick="showTab('sessions')">
+                    <i class="fas fa-calendar-alt"></i> الجلسات
+                </button>
+                <button class="tab-button" onclick="showTab('documents')">
+                    <i class="fas fa-file-alt"></i> المستندات
+                </button>
+                <button class="tab-button" onclick="showTab('history')">
+                    <i class="fas fa-history"></i> السجل
+                </button>
+                <button class="tab-button" onclick="showTab('actions')">
+                    <i class="fas fa-cogs"></i> الإجراءات
+                </button>
+            </nav>
+
+            <div class="tab-content">
+                <!-- تبويب النظرة العامة -->
+                <div id="overview-tab" class="tab-panel active">
+                    <h3><i class="fas fa-info-circle"></i> المعلومات الأساسية</h3>
+                    <div class="detail-grid">
+                        <div class="detail-section">
+                            <h4>معلومات القضية</h4>
+                            <div class="detail-item">
+                                <strong>رقم القضية:</strong>
+                                <span>2025-109</span>
+                            </div>
+                            <div class="detail-item">
+                                <strong>تاريخ التسجيل:</strong>
+                                <span>2025/09/25</span>
+                            </div>
+                            <div class="detail-item">
+                                <strong>مصدر القضية:</strong>
+                                <span>إيميل</span>
+                            </div>
+                            <div class="detail-item">
+                                <strong>الحالة:</strong>
+                                <span class="status active">نشطة</span>
+                            </div>
+                        </div>
+                        
+                        <div class="detail-section">
+                            <h4>معلومات المحكمة</h4>
+                            <div class="detail-item">
+                                <strong>المحكمة:</strong>
+                                <span>المحكمة العمالية</span>
+                            </div>
+                            <div class="detail-item">
+                                <strong>الدائرة:</strong>
+                                <span>الدائرة الرابعة</span>
+                            </div>
+                            <div class="detail-item">
+                                <strong>موعد أول جلسة:</strong>
+                                <span>2025/09/30 - 10:00 صباحاً</span>
+                            </div>
+                        </div>
+                        
+                        <div class="detail-section">
+                            <h4>معلومات المدعي</h4>
+                            <div class="detail-item">
+                                <strong>الاسم:</strong>
+                                <span>محمد أحمد الخالدي</span>
+                            </div>
+                            <div class="detail-item">
+                                <strong>رقم الهوية:</strong>
+                                <span>108889988</span>
+                            </div>
+                            <div class="detail-item">
+                                <strong>المسمى الوظيفي:</strong>
+                                <span>موظف إداري</span>
+                            </div>
+                            <div class="detail-item">
+                                <strong>الإدارة:</strong>
+                                <span>الموارد البشرية</span>
+                            </div>
+                        </div>
+                        
+                        <div class="detail-section">
+                            <h4>تفاصيل المطالبة</h4>
+                            <div class="detail-item">
+                                <strong>نوع المطالبة:</strong>
+                                <span>مطالبة مالية</span>
+                            </div>
+                            <div class="detail-item">
+                                <strong>مبلغ المطالبة:</strong>
+                                <span>4,000 ريال سعودي</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="complaint-section">
+                        <h4>تفاصيل لائحة الدعوى</h4>
+                        <div class="complaint-text">
+                            <p>يطالب المدعي بصرف مستحقاته المالية المتأخرة والبالغة 4000 ريال سعودي، والتي تتمثل في راتب شهر إضافي وبدل نقل لم يتم صرفهما وفقاً للنظام المعمول به في المؤسسة. كما يطالب بتعويض عن الضرر المعنوي الذي لحق به جراء التأخير في صرف هذه المستحقات.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- تبويب الجلسات -->
+                <div id="sessions-tab" class="tab-panel">
+                    <div class="sessions-header">
+                        <h3><i class="fas fa-calendar-alt"></i> جلسات المحكمة</h3>
+                        <button class="add-session-btn" onclick="addNewSession()">
+                            <i class="fas fa-plus"></i> إضافة جلسة جديدة
+                        </button>
+                    </div>
+                    
+                    <table class="session-table">
+                        <thead>
+                            <tr>
+                                <th>رقم الجلسة</th>
+                                <th>التاريخ والوقت</th>
+                                <th>المحكمة</th>
+                                <th>ملخص الجلسة</th>
+                                <th>طلبات القاضي</th>
+                                <th>الجلسة القادمة</th>
+                                <th>الإجراءات</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>001</strong></td>
+                                <td>2025/09/30<br>10:00 صباحاً</td>
+                                <td>العمالية - الدائرة 4</td>
+                                <td>جلسة مرافعة أولى</td>
+                                <td>تقديم المستندات الداعمة</td>
+                                <td>2025/10/15<br>11:00 صباحاً</td>
+                                <td>
+                                    <button class="btn-action edit" onclick="editSession(1)">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr class="upcoming">
+                                <td><strong>002</strong></td>
+                                <td>2025/10/15<br>11:00 صباحاً</td>
+                                <td>العمالية - الدائرة 4</td>
+                                <td class="text-muted">لم تنعقد بعد</td>
+                                <td class="text-muted">-</td>
+                                <td class="text-muted">سيتم تحديدها</td>
+                                <td>
+                                    <span class="status warning">قادمة</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- تبويب المستندات -->
+                <div id="documents-tab" class="tab-panel">
+                    <h3><i class="fas fa-file-alt"></i> المستندات والمرفقات</h3>
+                    
+                    <div class="document-grid">
+                        <!-- منطقة رفع الملفات -->
+                        <div class="document-card upload-area" onclick="uploadDocument()">
+                            <i class="fas fa-cloud-upload-alt fa-3x" style="margin-bottom: 1rem;"></i>
+                            <h4>رفع مستند جديد</h4>
+                            <p>اضغط هنا لرفع الملفات</p>
+                        </div>
+                        
+                        <!-- المستندات الموجودة -->
+                        <div class="document-card">
+                            <i class="fas fa-file-pdf fa-3x" style="color: #e53e3e; margin-bottom: 1rem;"></i>
+                            <h4>لائحة الدعوى</h4>
+                            <p>PDF - 2.3 MB</p>
+                            <div class="document-actions">
+                                <button class="btn-action view" onclick="viewDocument('lawsuit.pdf')">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="btn-action download" onclick="downloadDocument('lawsuit.pdf')">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="document-card">
+                            <i class="fas fa-file-word fa-3x" style="color: #2b6cb0; margin-bottom: 1rem;"></i>
+                            <h4>عقد العمل</h4>
+                            <p>DOC - 1.8 MB</p>
+                            <div class="document-actions">
+                                <button class="btn-action view" onclick="viewDocument('contract.doc')">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="btn-action download" onclick="downloadDocument('contract.doc')">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="document-card">
+                            <i class="fas fa-file-image fa-3x" style="color: #38a169; margin-bottom: 1rem;"></i>
+                            <h4>صورة الهوية</h4>
+                            <p>JPG - 856 KB</p>
+                            <div class="document-actions">
+                                <button class="btn-action view" onclick="viewDocument('id.jpg')">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="btn-action download" onclick="downloadDocument('id.jpg')">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- تبويب السجل -->
+                <div id="history-tab" class="tab-panel">
+                    <h3><i class="fas fa-history"></i> سجل التغييرات والإجراءات</h3>
+                    
+                    <div class="history-timeline">
+                        <div class="history-item">
+                            <div class="history-content">
+                                <div class="history-meta">
+                                    <i class="fas fa-user"></i> أحمد محمد الخالدي - 2025/09/28 - 02:30 م
+                                </div>
+                                <h4><i class="fas fa-file-upload"></i> رفع مستند جديد</h4>
+                                <p>تم رفع مستند "صورة الهوية" إلى ملف القضية</p>
+                            </div>
+                        </div>
+                        
+                        <div class="history-item">
+                            <div class="history-content">
+                                <div class="history-meta">
+                                    <i class="fas fa-user"></i> سارة أحمد المدير - 2025/09/27 - 11:15 ص
+                                </div>
+                                <h4><i class="fas fa-calendar-plus"></i> تحديث موعد الجلسة</h4>
+                                <p>تم تحديد موعد الجلسة القادمة: 2025/10/15 الساعة 11:00 صباحاً</p>
+                            </div>
+                        </div>
+                        
+                        <div class="history-item">
+                            <div class="history-content">
+                                <div class="history-meta">
+                                    <i class="fas fa-user"></i> محمد علي الممثل - 2025/09/26 - 09:45 ص
+                                </div>
+                                <h4><i class="fas fa-edit"></i> تعديل تفاصيل القضية</h4>
+                                <p>تم تحديث مبلغ المطالبة من 3500 ريال إلى 4000 ريال</p>
+                            </div>
+                        </div>
+                        
+                        <div class="history-item">
+                            <div class="history-content">
+                                <div class="history-meta">
+                                    <i class="fas fa-user"></i> النظام - 2025/09/25 - 08:30 ص
+                                </div>
+                                <h4><i class="fas fa-plus-circle"></i> إنشاء القضية</h4>
+                                <p>تم إنشاء القضية رقم 2025-109 وتسجيلها في النظام</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- تبويب الإجراءات -->
+                <div id="actions-tab" class="tab-panel">
+                    <h3><i class="fas fa-cogs"></i> الإجراءات المتاحة</h3>
+                    
+                    <div class="actions-grid">
+                        <div class="action-section">
+                            <h4><i class="fas fa-share"></i> إحالة القضية</h4>
+                            <p>تحويل القضية إلى جهة أخرى أو ممثل قانوني آخر</p>
+                            <button class="btn primary" onclick="transferCase()">
+                                <i class="fas fa-share"></i> إحالة القضية
+                            </button>
+                        </div>
+                        
+                        <div class="action-section">
+                            <h4><i class="fas fa-gavel"></i> إغلاق القضية</h4>
+                            <p>إغلاق القضية وتحديد نتيجة الحكم النهائي</p>
+                            <button class="btn success" onclick="closeCase()">
+                                <i class="fas fa-check-circle"></i> إغلاق القضية
+                            </button>
+                        </div>
+                        
+                        <div class="action-section">
+                            <h4><i class="fas fa-bell"></i> إضافة تذكير</h4>
+                            <p>إنشاء تذكير لموعد مهم أو إجراء مطلوب</p>
+                            <button class="btn info" onclick="addReminder()">
+                                <i class="fas fa-plus"></i> إضافة تذكير
+                            </button>
+                        </div>
+                        
+                        <div class="action-section">
+                            <h4><i class="fas fa-print"></i> طباعة التقرير</h4>
+                            <p>طباعة تقرير شامل عن القضية وتفاصيلها</p>
+                            <button class="btn outline" onclick="printReport()">
+                                <i class="fas fa-print"></i> طباعة التقرير
+                            </button>
+                        </div>
+                        
+                        <div class="action-section">
+                            <h4><i class="fas fa-archive"></i> أرشفة القضية</h4>
+                            <p>نقل القضية إلى الأرشيف مع الاحتفاظ بجميع البيانات</p>
+                            <button class="btn secondary" onclick="archiveCase()">
+                                <i class="fas fa-archive"></i> أرشفة
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // وظائف التبويبات
+        function showTab(tabName) {
+            // إزالة الحالة النشطة من جميع التبويبات
+            document.querySelectorAll('.tab-button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.querySelectorAll('.tab-panel').forEach(panel => {
+                panel.classList.remove('active');
+            });
+            
+            // تفعيل التبويب المحدد
+            document.querySelector(`[onclick="showTab('${tabName}')"]`).classList.add('active');
+            document.getElementById(`${tabName}-tab`).classList.add('active');
+        }
+        
+        // وظائف الإجراءات
+        function editCase() {
+            alert('سيتم توجيهك لصفحة تعديل القضية');
+        }
+        
+        function assignCase() {
+            if (confirm('هل تريد إحالة هذه القضية إلى جهة أخرى؟')) {
+                alert('تم إحالة القضية بنجاح');
+            }
+        }
+        
+        function archiveCase() {
+            if (confirm('هل تريد أرشفة هذه القضية؟\nلن تظهر في القوائم النشطة بعد الأرشفة.')) {
+                alert('تم أرشفة القضية بنجاح');
+            }
+        }
+        
+        function addNewSession() {
+            alert('سيتم فتح نموذج إضافة جلسة جديدة');
+        }
+        
+        function editSession(sessionId) {
+            alert('تعديل الجلسة رقم: ' + sessionId);
+        }
+        
+        function uploadDocument() {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.multiple = true;
+            input.accept = '.pdf,.doc,.docx,.jpg,.jpeg,.png';
+            input.onchange = function(e) {
+                alert('تم رفع ' + e.target.files.length + ' ملف(ات) بنجاح');
+            };
+            input.click();
+        }
+        
+        function viewDocument(filename) {
+            alert('عرض المستند: ' + filename);
+        }
+        
+        function downloadDocument(filename) {
+            alert('تحميل المستند: ' + filename);
+        }
+        
+        function transferCase() {
+            alert('سيتم فتح نموذج إحالة القضية');
+        }
+        
+        function closeCase() {
+            if (confirm('هل تريد إغلاق هذه القضية؟\nيرجى التأكد من إدخال جميع التفاصيل النهائية.')) {
+                alert('سيتم فتح نموذج إغلاق القضية');
+            }
+        }
+        
+        function addReminder() {
+            alert('سيتم فتح نموذج إضافة تذكير جديد');
+        }
+        
+        function printReport() {
+            window.print();
+        }
+        
+        // تحسينات إضافية للواجهة
+        document.addEventListener('DOMContentLoaded', function() {
+            // إضافة تأثيرات تفاعلية
+            const actionSections = document.querySelectorAll('.action-section');
+            actionSections.forEach(section => {
+                section.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-5px)';
+                });
+                section.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+            });
+        });
+    </script>
+
+    <style>
+        .detail-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .detail-section {
+            background: var(--light-gray);
+            padding: 1.5rem;
+            border-radius: var(--border-radius-lg);
+            border: 1px solid var(--border-gray);
+        }
+        
+        .detail-section h4 {
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--accent-blue);
+        }
+        
+        .detail-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem;
+            margin-bottom: 0.5rem;
+            background: white;
+            border-radius: var(--border-radius);
+            border: 1px solid var(--border-gray);
+        }
+        
+        .detail-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        .complaint-section {
+            margin-top: 2rem;
+            background: white;
+            padding: 2rem;
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-small);
+        }
+        
+        .complaint-section h4 {
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+        }
+        
+        .complaint-text {
+            background: var(--light-gray);
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            border-left: 4px solid var(--primary-blue);
+        }
+        
+        .text-muted {
+            color: var(--medium-gray);
+            font-style: italic;
+        }
+        
+        .upcoming {
+            background: rgba(245, 158, 11, 0.05);
+        }
+        
+        .document-actions {
+            display: flex;
+            gap: 0.5rem;
+            justify-content: center;
+            margin-top: 1rem;
+        }
+        
+        .actions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .action-section {
+            background: white;
+            padding: 2rem;
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-small);
+            text-align: center;
+            transition: var(--transition);
+        }
+        
+        .action-section:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-medium);
+        }
+        
+        .action-section h4 {
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+        }
+        
+        .action-section p {
+            color: var(--medium-gray);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+    </style>
+</body>
+</html>

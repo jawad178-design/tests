@@ -1,46 +1,47 @@
-/* نظام مسار القانوني - المطابق لهوية شركة الصحة القابضة */
-/* Legal System Enhanced - Matching Health.sa Visual Identity */
+/* نظام مسار القانوني - المطابق لهوية شركة الصحة القابضة الفعلية */
+/* Legal System Enhanced - Matching Actual Health.sa Visual Identity */
 
-/* CSS Variables - Health.sa Colors */
+/* CSS Variables - Actual Health.sa Colors from Screenshots */
 :root {
-    /* الألوان الأساسية لشركة الصحة القابضة */
-    --health-primary: #00a651;      /* الأخضر الأساسي للصحة */
-    --health-secondary: #2e7d32;    /* الأخضر الداكن */
-    --health-accent: #4caf50;       /* الأخضر الفاتح */
-    --health-dark: #1b5e20;         /* الأخضر العميق */
+    /* الألوان الأساسية الفعلية لشركة الصحة القابضة */
+    --health-primary-teal: #008B8B;      /* التركوازي الأساسي - Primary Teal */
+    --health-light-teal: #20B2AA;        /* التركوازي الفاتح - Light Teal */
+    --health-secondary-blue: #1E3A8A;    /* الأزرق الداكن - Deep Blue */
+    --health-accent-blue: #3B82F6;       /* الأزرق الفاتح - Light Blue */
     
-    /* الألوان الثانوية */
-    --health-blue: #1976d2;         /* الأزرق المؤسسي */
-    --health-light-blue: #2196f3;   /* الأزرق الفاتح */
-    --health-navy: #0d47a1;         /* الأزرق الداكن */
+    /* الألوان المساعدة الفعلية */
+    --health-white: #FFFFFF;             /* الأبيض */
+    --health-light-gray: #F8F9FA;        /* الرمادي الفاتح */
+    --health-medium-gray: #6B7280;       /* الرمادي المتوسط */
+    --health-dark-gray: #1F2937;         /* الرمادي الداكن */
     
     /* ألوان النظام */
-    --success-green: #4caf50;
-    --warning-orange: #ff9800;
-    --danger-red: #f44336;
-    --info-blue: #2196f3;
+    --success-green: #10B981;
+    --warning-orange: #F59E0B;
+    --danger-red: #EF4444;
+    --info-blue: #3B82F6;
     
     /* الخلفيات والنصوص */
-    --bg-light: #fafafa;
-    --bg-white: #ffffff;
-    --bg-gray: #f5f5f5;
-    --bg-card: #ffffff;
+    --bg-primary: #FFFFFF;
+    --bg-secondary: #F8F9FA;
+    --bg-light: #F9FAFB;
+    --bg-card: #FFFFFF;
     
-    --text-primary: #212121;
-    --text-secondary: #757575;
-    --text-light: #9e9e9e;
+    --text-primary: #1F2937;
+    --text-secondary: #6B7280;
+    --text-light: #9CA3AF;
     
-    --border-light: #e0e0e0;
-    --border-medium: #bdbdbd;
+    --border-light: #E5E7EB;
+    --border-medium: #D1D5DB;
     
     /* الظلال */
-    --shadow-light: 0 2px 4px rgba(0, 166, 81, 0.1);
-    --shadow-medium: 0 4px 8px rgba(0, 166, 81, 0.15);
-    --shadow-hover: 0 8px 16px rgba(0, 166, 81, 0.2);
+    --shadow-light: 0 1px 3px rgba(0, 139, 139, 0.1);
+    --shadow-medium: 0 4px 6px rgba(0, 139, 139, 0.1);
+    --shadow-hover: 0 8px 25px rgba(0, 139, 139, 0.15);
     
-    /* الخطوط المطابقة لـ health.sa */
-    --font-primary: 'Cairo', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    --font-secondary: 'Tajawal', 'Cairo', Arial, sans-serif;
+    /* الخطوط المطابقة لـ health.sa الفعلية */
+    --font-arabic: 'Cairo', 'Tajawal', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --font-english: 'Inter', 'Arial', 'Helvetica', sans-serif;
     
     --border-radius: 8px;
     --border-radius-large: 12px;
@@ -55,14 +56,15 @@
 }
 
 body {
-    font-family: var(--font-primary);
-    background: linear-gradient(135deg, #f8f9fa 0%, #e8f5e8 100%);
+    font-family: var(--font-arabic);
+    background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-light) 100%);
     color: var(--text-primary);
     direction: rtl;
     line-height: 1.6;
+    font-size: 16px;
 }
 
-/* Add health.sa inspired background pattern */
+/* Add health.sa inspired background pattern matching screenshots */
 body::before {
     content: '';
     position: fixed;
@@ -71,17 +73,17 @@ body::before {
     width: 100%;
     height: 100%;
     background: 
-        radial-gradient(circle at 20% 20%, rgba(0, 166, 81, 0.03) 0%, transparent 50%),
-        radial-gradient(circle at 80% 80%, rgba(25, 118, 210, 0.03) 0%, transparent 50%),
-        radial-gradient(circle at 50% 50%, rgba(0, 166, 81, 0.02) 0%, transparent 50%);
+        radial-gradient(circle at 20% 20%, rgba(0, 139, 139, 0.03) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(30, 58, 138, 0.03) 0%, transparent 50%),
+        radial-gradient(circle at 50% 50%, rgba(32, 178, 170, 0.02) 0%, transparent 50%);
     pointer-events: none;
     z-index: -1;
 }
 
-/* Header - Health.sa Style with Saudi Health Colors */
+/* Header - Exact Health.sa Style from Screenshots */
 .header {
-    background: linear-gradient(135deg, var(--health-primary), var(--health-secondary));
-    color: white;
+    background: linear-gradient(135deg, var(--health-primary-teal), var(--health-light-teal));
+    color: var(--health-white);
     padding: 1rem 2rem;
     box-shadow: var(--shadow-medium);
     position: fixed;
@@ -89,7 +91,7 @@ body::before {
     right: 0;
     left: 0;
     z-index: 100;
-    border-bottom: 3px solid var(--health-accent);
+    border-bottom: 3px solid var(--health-light-teal);
 }
 
 .header::before {
@@ -100,11 +102,11 @@ body::before {
     right: 0;
     height: 3px;
     background: linear-gradient(90deg, 
-        var(--health-primary) 0%, 
-        var(--health-accent) 25%, 
-        var(--health-blue) 50%, 
-        var(--health-accent) 75%, 
-        var(--health-primary) 100%);
+        var(--health-primary-teal) 0%, 
+        var(--health-light-teal) 25%, 
+        var(--health-accent-blue) 50%, 
+        var(--health-light-teal) 75%, 
+        var(--health-primary-teal) 100%);
 }
 
 .header-content {
@@ -190,8 +192,8 @@ body::before {
 
 .nav-link:hover,
 .nav-link.active {
-    background: linear-gradient(135deg, var(--health-primary), var(--health-secondary));
-    color: white;
+    background: linear-gradient(135deg, var(--health-primary-teal), var(--health-light-teal));
+    color: var(--health-white);
     border-radius: var(--border-radius);
     box-shadow: var(--shadow-light);
 }
@@ -231,7 +233,7 @@ body::before {
 }
 
 .page-header {
-    background: linear-gradient(135deg, #f8f9fa 0%, rgba(0, 166, 81, 0.05) 100%);
+    background: linear-gradient(135deg, #f8f9fa 0%, rgba(0, 139, 139, 0.05) 100%);
     padding: 1.5rem 2rem;
     border-bottom: 2px solid rgba(0, 166, 81, 0.1);
     display: flex;
@@ -249,7 +251,7 @@ body::before {
 }
 
 .page-header h2 i {
-    color: var(--health-primary);
+    color: var(--health-primary-teal);
 }
 
 .header-navigation {
@@ -259,8 +261,8 @@ body::before {
 
 .nav-item {
     padding: 0.5rem 1rem;
-    background: linear-gradient(135deg, var(--health-blue), var(--health-navy));
-    color: white;
+    background: linear-gradient(135deg, var(--health-accent-blue), var(--health-secondary-blue));
+    color: var(--health-white);
     border-radius: var(--border-radius);
     font-size: 0.9rem;
     cursor: pointer;
@@ -269,7 +271,7 @@ body::before {
 }
 
 .nav-item.active {
-    background: linear-gradient(135deg, var(--health-primary), var(--health-secondary));
+    background: linear-gradient(135deg, var(--health-primary-teal), var(--health-light-teal));
     transform: scale(1.05);
 }
 
@@ -313,8 +315,8 @@ body::before {
     color: white;
 }
 
-.stat-icon.blue { background: var(--health-blue); }
-.stat-icon.green { background: var(--health-primary); }
+.stat-icon.blue { background: var(--health-accent-blue); }
+.stat-icon.green { background: var(--health-primary-teal); }
 .stat-icon.orange { background: var(--warning-orange); }
 .stat-icon.purple { background: var(--health-secondary); }
 
@@ -376,7 +378,7 @@ body::before {
 
 .notification-number {
     font-weight: 600;
-    color: var(--health-primary);
+    color: var(--health-primary-teal);
     min-width: 20px;
 }
 
@@ -420,8 +422,8 @@ body::before {
 
 .case-table th,
 .enhanced-cases-table th {
-    background: linear-gradient(135deg, var(--health-primary), var(--health-secondary));
-    color: white;
+    background: linear-gradient(135deg, var(--health-primary-teal), var(--health-light-teal));
+    color: var(--health-white);
     font-weight: 600;
     font-size: 0.9rem;
 }
@@ -461,23 +463,23 @@ body::before {
 }
 
 .btn-blue {
-    background: linear-gradient(135deg, var(--health-blue), var(--health-navy));
-    color: white;
+    background: linear-gradient(135deg, var(--health-accent-blue), var(--health-secondary-blue));
+    color: var(--health-white);
 }
 
 .btn-blue:hover {
-    background: linear-gradient(135deg, var(--health-navy), var(--health-blue));
+    background: linear-gradient(135deg, var(--health-secondary-blue), var(--health-accent-blue));
     transform: translateY(-1px);
     box-shadow: var(--shadow-medium);
 }
 
 .btn-green {
-    background: linear-gradient(135deg, var(--health-primary), var(--health-secondary));
-    color: white;
+    background: linear-gradient(135deg, var(--health-primary-teal), var(--health-light-teal));
+    color: var(--health-white);
 }
 
 .btn-green:hover {
-    background: linear-gradient(135deg, var(--health-secondary), var(--health-primary));
+    background: linear-gradient(135deg, var(--health-light-teal), var(--health-primary-teal));
     transform: translateY(-1px);
     box-shadow: var(--shadow-medium);
 }

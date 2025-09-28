@@ -1,0 +1,463 @@
+/* Additional Styles for Legal Case Management System */
+
+/* Consultation Status */
+.status.pending {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.status.in-review {
+    background: #cce5ff;
+    color: #0066cc;
+}
+
+.status.approved {
+    background: #d4edda;
+    color: #155724;
+}
+
+.status.completed {
+    background: #e2e3e5;
+    color: #383d41;
+}
+
+/* Archive Outcomes */
+.outcome.won {
+    background: #d4edda;
+    color: #155724;
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.outcome.lost {
+    background: #f8d7da;
+    color: #721c24;
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.outcome.settled {
+    background: #cce5ff;
+    color: #0066cc;
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+/* Library Styles */
+.library-categories {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    overflow: hidden;
+}
+
+.category-tabs {
+    display: flex;
+    background: #f8f9fa;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.category-tab {
+    flex: 1;
+    padding: 1rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-weight: 600;
+    color: #7f8c8d;
+}
+
+.category-tab.active,
+.category-tab:hover {
+    background: white;
+    color: #2980b9;
+    border-bottom: 3px solid #2980b9;
+}
+
+.category-content {
+    display: none;
+    padding: 2rem;
+}
+
+.category-content.active {
+    display: block;
+}
+
+.document-card {
+    background: #f8f9fa;
+    border: 2px solid #e9ecef;
+    border-radius: 12px;
+    padding: 1.5rem;
+    transition: all 0.3s;
+    cursor: pointer;
+}
+
+.document-card:hover {
+    border-color: #3498db;
+    background: #f0f8ff;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(52,152,219,0.2);
+}
+
+.document-card .document-icon {
+    width: 60px;
+    height: 60px;
+    background: #e74c3c;
+    color: white;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+}
+
+.document-card .document-info h4 {
+    color: #2c3e50;
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+}
+
+.document-card .document-info p {
+    color: #7f8c8d;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+}
+
+.document-tags {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.tag {
+    background: #3498db;
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.document-actions {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    border-top: 1px solid #e9ecef;
+    padding-top: 1rem;
+}
+
+/* Reports Styles */
+.report-filters {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    margin-bottom: 2rem;
+}
+
+.filter-row {
+    display: flex;
+    gap: 1.5rem;
+    align-items: end;
+    flex-wrap: wrap;
+}
+
+.reports-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 2rem;
+}
+
+.report-card {
+    background: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.report-card.full-width {
+    grid-column: 1 / -1;
+}
+
+.report-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid #f8f9fa;
+}
+
+.report-header h3 {
+    color: #2c3e50;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.chart-container {
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f8f9fa;
+    border-radius: 8px;
+    color: #7f8c8d;
+    font-style: italic;
+}
+
+.chart-container:before {
+    content: "الرسم البياني سيظهر هنا";
+}
+
+.performance-table {
+    overflow-x: auto;
+}
+
+.performance-table table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.performance-table th,
+.performance-table td {
+    padding: 1rem;
+    text-align: right;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.performance-table th {
+    background: #f8f9fa;
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+/* Settings Styles */
+.settings-container {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    overflow: hidden;
+    display: flex;
+    min-height: 600px;
+}
+
+.settings-nav {
+    width: 250px;
+    background: #f8f9fa;
+    border-left: 1px solid #e9ecef;
+}
+
+.settings-tab {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.5rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    border-bottom: 1px solid #e9ecef;
+    color: #7f8c8d;
+}
+
+.settings-tab:hover,
+.settings-tab.active {
+    background: white;
+    color: #2980b9;
+    border-left: 4px solid #2980b9;
+}
+
+.settings-content {
+    flex: 1;
+    padding: 2rem;
+}
+
+.settings-panel {
+    display: none;
+}
+
+.settings-panel.active {
+    display: block;
+}
+
+.settings-form {
+    max-width: 600px;
+}
+
+.settings-form .form-group {
+    margin-bottom: 1.5rem;
+}
+
+.notification-preferences {
+    max-width: 600px;
+}
+
+.preference-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background: #f8f9fa;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+}
+
+.preference-info {
+    flex: 1;
+}
+
+.preference-info h4 {
+    margin-bottom: 0.25rem;
+    color: #2c3e50;
+}
+
+.preference-info p {
+    color: #7f8c8d;
+    font-size: 0.9rem;
+}
+
+/* Toggle Switch */
+.toggle-switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+.toggle-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+    border-radius: 34px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    right: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: #2980b9;
+}
+
+input:checked + .slider:before {
+    transform: translateX(-26px);
+}
+
+/* Consultation Details */
+.consultation-details {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.detail-section {
+    background: #f8f9fa;
+    padding: 1.5rem;
+    border-radius: 8px;
+}
+
+.detail-section h3 {
+    color: #2c3e50;
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.consultation-subject,
+.consultation-content {
+    background: white;
+    padding: 1rem;
+    border-radius: 6px;
+    border-right: 4px solid #3498db;
+}
+
+.legal-response textarea {
+    width: 100%;
+    min-height: 150px;
+    padding: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-family: inherit;
+    resize: vertical;
+}
+
+/* Fix backdrop-filter browser support */
+.modal {
+    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(5px);
+}
+
+/* Mobile Responsiveness for New Sections */
+@media (max-width: 768px) {
+    .category-tabs {
+        flex-direction: column;
+    }
+    
+    .category-tab {
+        justify-content: flex-start;
+        padding-right: 1rem;
+    }
+    
+    .reports-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .settings-container {
+        flex-direction: column;
+    }
+    
+    .settings-nav {
+        width: 100%;
+        display: flex;
+        overflow-x: auto;
+    }
+    
+    .settings-tab {
+        min-width: 200px;
+        border-bottom: none;
+        border-left: none;
+    }
+    
+    .documents-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .filter-row {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .filter-row .filter-group {
+        min-width: auto;
+    }
+}

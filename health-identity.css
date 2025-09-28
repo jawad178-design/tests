@@ -1,0 +1,458 @@
+/* الهوية البصرية المستوحاة من شركة الصحة القابضة */
+/* Health Holding Company Visual Identity */
+
+/* ==================== الألوان الأساسية ==================== */
+:root {
+    /* الألوان الأساسية - شركة الصحة القابضة */
+    --primary-blue: #1e3c72;
+    --primary-blue-light: #2a5298;
+    --secondary-blue: #3b82f6;
+    --accent-blue: #60a5fa;
+    --dark-blue: #1e40af;
+    
+    /* الألوان المساعدة */
+    --white: #ffffff;
+    --light-gray: #f8fafc;
+    --medium-gray: #64748b;
+    --dark-gray: #1e293b;
+    --border-gray: #e2e8f0;
+    
+    /* تدرجات مخصصة */
+    --gradient-primary: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+    --gradient-secondary: linear-gradient(45deg, #3b82f6, #1e40af);
+    --gradient-background: linear-gradient(180deg, #f1f5f9 0%, #e2e8f0 100%);
+    --gradient-card: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+    
+    /* ظلال مخصصة */
+    --shadow-small: 0 2px 4px rgba(30, 60, 114, 0.1);
+    --shadow-medium: 0 4px 12px rgba(30, 60, 114, 0.15);
+    --shadow-large: 0 8px 24px rgba(30, 60, 114, 0.2);
+    --shadow-hover: 0 12px 32px rgba(30, 60, 114, 0.25);
+}
+
+/* ==================== إعادة تعيين الألوان الأساسية ==================== */
+body {
+    font-family: 'Cairo', 'Tajawal', 'Almarai', sans-serif;
+    background: var(--gradient-background);
+    color: var(--dark-gray);
+}
+
+/* ==================== الهيدر Header ==================== */
+.header {
+    background: var(--gradient-primary);
+    box-shadow: var(--shadow-medium);
+    border-bottom: 3px solid var(--accent-blue);
+}
+
+.header .logo h1 {
+    color: var(--white);
+    font-weight: 700;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.header .user-info span {
+    color: var(--white);
+    font-weight: 500;
+}
+
+/* ==================== الشريط الجانبي Sidebar ==================== */
+.sidebar {
+    background: linear-gradient(180deg, var(--white) 0%, var(--light-gray) 100%);
+    border-right: 1px solid var(--border-gray);
+    box-shadow: var(--shadow-medium);
+}
+
+.sidebar nav ul li a {
+    color: var(--primary-blue);
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.sidebar nav ul li a:hover,
+.sidebar nav ul li a.active {
+    background: var(--gradient-secondary);
+    color: var(--white);
+    box-shadow: var(--shadow-small);
+    transform: translateX(-2px);
+}
+
+.sidebar nav ul li a i {
+    color: var(--secondary-blue);
+}
+
+.sidebar nav ul li a:hover i,
+.sidebar nav ul li a.active i {
+    color: var(--white);
+}
+
+/* ==================== البطاقات Cards ==================== */
+.stats-card, .case-card, .library-card {
+    background: var(--gradient-card);
+    border: 1px solid var(--border-gray);
+    border-radius: 12px;
+    box-shadow: var(--shadow-small);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.stats-card::before, .case-card::before, .library-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: var(--gradient-primary);
+}
+
+.stats-card:hover, .case-card:hover, .library-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-hover);
+}
+
+.stats-card h3 {
+    color: var(--primary-blue);
+    font-weight: 700;
+}
+
+.stats-card .number {
+    color: var(--secondary-blue);
+    font-weight: 800;
+    font-size: 2.5rem;
+}
+
+/* ==================== الأزرار Buttons ==================== */
+.btn-primary {
+    background: var(--gradient-primary);
+    color: var(--white);
+    border: none;
+    border-radius: 8px;
+    padding: 12px 24px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: var(--shadow-small);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-medium);
+    background: linear-gradient(135deg, #2a5298 0%, #1e3c72 100%);
+}
+
+.btn-secondary {
+    background: transparent;
+    color: var(--primary-blue);
+    border: 2px solid var(--secondary-blue);
+    border-radius: 8px;
+    padding: 10px 22px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+    background: var(--secondary-blue);
+    color: var(--white);
+    transform: translateY(-1px);
+}
+
+/* ==================== الجداول Tables ==================== */
+.table-container {
+    background: var(--white);
+    border-radius: 12px;
+    box-shadow: var(--shadow-medium);
+    overflow: hidden;
+    border: 1px solid var(--border-gray);
+}
+
+.table thead {
+    background: var(--gradient-primary);
+}
+
+.table thead th {
+    color: var(--white);
+    font-weight: 600;
+    border: none;
+    padding: 16px 12px;
+}
+
+.table tbody tr {
+    transition: all 0.2s ease;
+}
+
+.table tbody tr:hover {
+    background: linear-gradient(90deg, var(--light-gray) 0%, var(--white) 100%);
+    transform: scale(1.01);
+}
+
+.table tbody td {
+    border-color: var(--border-gray);
+    padding: 12px;
+}
+
+/* ==================== حالات الحالة Status ==================== */
+.status {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-align: center;
+    box-shadow: var(--shadow-small);
+}
+
+.status.new {
+    background: linear-gradient(45deg, #10b981, #059669);
+    color: var(--white);
+}
+
+.status.in-progress {
+    background: linear-gradient(45deg, #f59e0b, #d97706);
+    color: var(--white);
+}
+
+.status.in-court {
+    background: linear-gradient(45deg, #3b82f6, #1d4ed8);
+    color: var(--white);
+}
+
+.status.completed {
+    background: linear-gradient(45deg, #6366f1, #4338ca);
+    color: var(--white);
+}
+
+/* ==================== النماذج Forms ==================== */
+.form-group label {
+    color: var(--primary-blue);
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.form-control {
+    border: 2px solid var(--border-gray);
+    border-radius: 8px;
+    padding: 12px 16px;
+    transition: all 0.3s ease;
+    background: var(--white);
+}
+
+.form-control:focus {
+    border-color: var(--secondary-blue);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    outline: none;
+}
+
+.form-control::placeholder {
+    color: var(--medium-gray);
+}
+
+/* ==================== المودال Modal ==================== */
+.modal-content {
+    border: none;
+    border-radius: 16px;
+    box-shadow: var(--shadow-large);
+    background: var(--white);
+}
+
+.modal-header {
+    background: var(--gradient-primary);
+    color: var(--white);
+    border-radius: 16px 16px 0 0;
+    border-bottom: none;
+    padding: 20px 24px;
+}
+
+.modal-header .modal-title {
+    font-weight: 700;
+    font-size: 1.25rem;
+}
+
+.modal-header .close {
+    color: var(--white);
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+}
+
+.modal-header .close:hover {
+    opacity: 1;
+}
+
+.modal-body {
+    padding: 24px;
+}
+
+.modal-footer {
+    border-top: 1px solid var(--border-gray);
+    padding: 16px 24px;
+}
+
+/* ==================== التبويبات Tabs ==================== */
+.nav-tabs {
+    border-bottom: 2px solid var(--border-gray);
+}
+
+.nav-tabs .nav-link {
+    color: var(--medium-gray);
+    border: none;
+    border-radius: 8px 8px 0 0;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.nav-tabs .nav-link:hover {
+    background: var(--light-gray);
+    color: var(--primary-blue);
+}
+
+.nav-tabs .nav-link.active {
+    background: var(--gradient-primary);
+    color: var(--white);
+    border-bottom: 3px solid var(--accent-blue);
+}
+
+/* ==================== الإشعارات Notifications ==================== */
+.notification-badge {
+    background: linear-gradient(45deg, #ef4444, #dc2626);
+    color: var(--white);
+    border-radius: 50%;
+    font-size: 0.75rem;
+    font-weight: 700;
+    box-shadow: var(--shadow-small);
+}
+
+.notification-dropdown {
+    background: var(--white);
+    border: 1px solid var(--border-gray);
+    border-radius: 12px;
+    box-shadow: var(--shadow-large);
+}
+
+/* ==================== الرسوم البيانية Charts ==================== */
+.chart-container {
+    background: var(--white);
+    border-radius: 12px;
+    box-shadow: var(--shadow-medium);
+    padding: 24px;
+    border: 1px solid var(--border-gray);
+}
+
+/* ==================== الفلاتر Filters ==================== */
+.filter-container {
+    background: var(--white);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: var(--shadow-small);
+    border: 1px solid var(--border-gray);
+    margin-bottom: 24px;
+}
+
+.filter-container .form-control {
+    border-color: var(--border-gray);
+}
+
+.filter-container .btn {
+    background: var(--gradient-secondary);
+    border: none;
+    color: var(--white);
+    font-weight: 500;
+}
+
+/* ==================== رسائل التنبيه Alerts ==================== */
+.alert {
+    border-radius: 12px;
+    border: none;
+    box-shadow: var(--shadow-small);
+    font-weight: 500;
+}
+
+.alert-success {
+    background: linear-gradient(45deg, #d1fae5, #a7f3d0);
+    color: #065f46;
+}
+
+.alert-warning {
+    background: linear-gradient(45deg, #fef3c7, #fde68a);
+    color: #92400e;
+}
+
+.alert-danger {
+    background: linear-gradient(45deg, #fecaca, #fca5a5);
+    color: #991b1b;
+}
+
+.alert-info {
+    background: linear-gradient(45deg, #dbeafe, #bfdbfe);
+    color: #1e40af;
+}
+
+/* ==================== التحسينات المتجاوبة Responsive ==================== */
+@media (max-width: 768px) {
+    .stats-card, .case-card, .library-card {
+        margin-bottom: 16px;
+    }
+    
+    .btn-primary, .btn-secondary {
+        width: 100%;
+        margin-bottom: 8px;
+    }
+    
+    .modal-dialog {
+        margin: 16px;
+    }
+    
+    .table-container {
+        border-radius: 8px;
+        margin: 16px 0;
+    }
+}
+
+/* ==================== تحسينات الأداء Performance ==================== */
+* {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.transition-all {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hover-lift:hover {
+    transform: translateY(-2px);
+    transition: transform 0.2s ease;
+}
+
+/* ==================== تأثيرات مخصصة Custom Effects ==================== */
+.glass-effect {
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.8);
+}
+
+.glow-effect {
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+}
+
+.gradient-text {
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 700;
+}
+
+/* ==================== تحسينات إضافية ==================== */
+.health-brand {
+    color: var(--primary-blue);
+    font-weight: 700;
+}
+
+.health-accent {
+    color: var(--secondary-blue);
+}
+
+.health-bg {
+    background: var(--gradient-primary);
+}
+
+.health-shadow {
+    box-shadow: var(--shadow-medium);
+}

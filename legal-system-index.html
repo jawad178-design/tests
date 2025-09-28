@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نظام مسار القانوني - الفهرس الرئيسي</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            min-height: 100vh;
+            color: #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+            padding: 3rem;
+            max-width: 800px;
+            width: 100%;
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .logo {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(30, 60, 114, 0.3);
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .system-title {
+            color: #1e3c72;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .system-subtitle {
+            color: #64748b;
+            font-size: 1.1rem;
+            margin-bottom: 3rem;
+            line-height: 1.6;
+        }
+
+        .pages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .page-card {
+            background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+            border-radius: 15px;
+            padding: 2rem;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s ease;
+            border: 2px solid #e2e8f0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(30, 60, 114, 0.2);
+            border-color: #3b82f6;
+        }
+
+        .page-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #1e3c72, #3b82f6);
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+        }
+
+        .page-card:hover::before {
+            transform: translateX(0);
+        }
+
+        .page-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(45deg, #1e3c72, #3b82f6);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            margin: 0 auto 1.5rem;
+        }
+
+        .page-title {
+            color: #1e3c72;
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .page-description {
+            color: #64748b;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin-bottom: 1.5rem;
+        }
+
+        .page-status {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .status-ready {
+            background: rgba(16, 185, 129, 0.1);
+            color: #059669;
+            border: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .status-demo {
+            background: rgba(59, 130, 246, 0.1);
+            color: #2563eb;
+            border: 1px solid rgba(59, 130, 246, 0.2);
+        }
+
+        .status-new {
+            background: rgba(245, 158, 11, 0.1);
+            color: #d97706;
+            border: 1px solid rgba(245, 158, 11, 0.2);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .features-list {
+            background: #f8fafc;
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: right;
+            border: 1px solid #e2e8f0;
+        }
+
+        .features-title {
+            color: #1e3c72;
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .features-columns {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .feature-group h4 {
+            color: #3b82f6;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .feature-group ul {
+            list-style: none;
+            padding-right: 1rem;
+        }
+
+        .feature-group li {
+            color: #64748b;
+            margin-bottom: 0.5rem;
+            position: relative;
+            padding-right: 1.5rem;
+        }
+
+        .feature-group li::before {
+            content: '✓';
+            position: absolute;
+            right: 0;
+            color: #10b981;
+            font-weight: bold;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid #e2e8f0;
+            color: #64748b;
+        }
+
+        .tech-info {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+
+        .tech-badge {
+            background: rgba(30, 60, 114, 0.1);
+            color: #1e3c72;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 1rem;
+                padding: 2rem;
+            }
+
+            .system-title {
+                font-size: 2rem;
+            }
+
+            .pages-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .features-columns {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .tech-info {
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- رأس النظام -->
+        <div class="logo-container">
+            <div class="logo">
+                <img src="file000000004b0862438e4aefa6c2e7e176.png" alt="شعار النظام" class="logo-img">
+            </div>
+        </div>
+        
+        <h1 class="system-title">نظام مسار القانوني</h1>
+        <p class="system-subtitle">
+            نظام إدارة القضايا والاستشارات القانونية المتكامل<br>
+            مصمم بنفس الهوية البصرية للنظام الصحي مع محتوى قانوني شامل
+        </p>
+
+        <!-- شبكة الصفحات -->
+        <div class="pages-grid">
+            <a href="legal-system-enhanced.html" class="page-card">
+                <div class="page-icon">
+                    <i class="fas fa-star"></i>
+                </div>
+                <h3 class="page-title">🆕 النظام المحدث حسب PDF</h3>
+                <p class="page-description">
+                    النسخة المطورة التي تطابق تماماً التصاميم والمتطلبات المذكورة في ملف PDF مع جميع النماذج والجداول المطلوبة
+                </p>
+                <span class="page-status status-new">جديد ومحدث</span>
+            </a>
+
+            <a href="legal-case-management.html" class="page-card">
+                <div class="page-icon">
+                    <i class="fas fa-tachometer-alt"></i>
+                </div>
+                <h3 class="page-title">النظام الرئيسي</h3>
+                <p class="page-description">
+                    لوحة التحكم الرئيسية مع إدارة القضايا المسندة، تسجيل القضايا الجديدة، والتبليغات
+                </p>
+                <span class="page-status status-ready">جاهز للاستخدام</span>
+            </a>
+
+            <a href="case-details.html" class="page-card">
+                <div class="page-icon">
+                    <i class="fas fa-folder-open"></i>
+                </div>
+                <h3 class="page-title">تفاصيل القضية</h3>
+                <p class="page-description">
+                    صفحة شاملة لعرض تفاصيل القضية مع التبويبات: النظرة العامة، الجلسات، المستندات، والسجل
+                </p>
+                <span class="page-status status-ready">جاهز للاستخدام</span>
+            </a>
+
+            <a href="website-health-identity.html" class="page-card">
+                <div class="page-icon">
+                    <i class="fas fa-palette"></i>
+                </div>
+                <h3 class="page-title">الهوية البصرية</h3>
+                <p class="page-description">
+                    النموذج الأساسي للهوية البصرية المستخدمة في تصميم النظام القانوني
+                </p>
+                <span class="page-status status-demo">مرجعي</span>
+            </a>
+
+            <a href="#" class="page-card" onclick="alert('هذه الصفحة قيد التطوير')">
+                <div class="page-icon">
+                    <i class="fas fa-comments"></i>
+                </div>
+                <h3 class="page-title">الاستشارات القانونية</h3>
+                <p class="page-description">
+                    إدارة طلبات الاستشارة القانونية وتوجيهها للمختصين (قيد التطوير)
+                </p>
+                <span class="page-status status-demo">قريباً</span>
+            </a>
+        </div>
+
+        <!-- قائمة الميزات -->
+        <div class="features-list">
+            <h3 class="features-title">
+                <i class="fas fa-star"></i>
+                الميزات المتوفرة في النظام
+            </h3>
+            
+            <div class="features-columns">
+                <div class="feature-group">
+                    <h4>
+                        <i class="fas fa-tachometer-alt"></i>
+                        لوحة التحكم
+                    </h4>
+                    <ul>
+                        <li>إحصائيات شاملة للقضايا</li>
+                        <li>القضايا النشطة والمحكوم عليها</li>
+                        <li>تذكيرات المواعيد</li>
+                        <li>إشعارات القضايا الجديدة</li>
+                    </ul>
+                </div>
+
+                <div class="feature-group">
+                    <h4>
+                        <i class="fas fa-folder-open"></i>
+                        إدارة القضايا
+                    </h4>
+                    <ul>
+                        <li>تسجيل القضايا الجديدة</li>
+                        <li>تحديث بيانات القضايا</li>
+                        <li>إحالة القضايا للجهات</li>
+                        <li>فلترة وبحث متقدم</li>
+                    </ul>
+                </div>
+
+                <div class="feature-group">
+                    <h4>
+                        <i class="fas fa-calendar-alt"></i>
+                        إدارة الجلسات
+                    </h4>
+                    <ul>
+                        <li>جدولة مواعيد الجلسات</li>
+                        <li>تسجيل ملخص الجلسات</li>
+                        <li>طلبات القاضي</li>
+                        <li>تذكيرات المواعيد</li>
+                    </ul>
+                </div>
+
+                <div class="feature-group">
+                    <h4>
+                        <i class="fas fa-file-alt"></i>
+                        إدارة المستندات
+                    </h4>
+                    <ul>
+                        <li>رفع وتنظيم المستندات</li>
+                        <li>عرض وتحميل الملفات</li>
+                        <li>أنواع ملفات متعددة</li>
+                        <li>سجل المستندات</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- المعلومات التقنية -->
+        <div class="footer">
+            <p><strong>نظام مسار القانوني</strong> - نظام إدارة القضايا والاستشارات القانونية</p>
+            <p>مصمم بنفس الهوية البصرية للنظام الصحي مع تخصيص المحتوى للاستخدام القانوني</p>
+            
+            <div class="tech-info">
+                <span class="tech-badge">
+                    <i class="fab fa-html5"></i> HTML5
+                </span>
+                <span class="tech-badge">
+                    <i class="fab fa-css3-alt"></i> CSS3
+                </span>
+                <span class="tech-badge">
+                    <i class="fab fa-js-square"></i> JavaScript
+                </span>
+                <span class="tech-badge">
+                    <i class="fas fa-mobile-alt"></i> متجاوب
+                </span>
+                <span class="tech-badge">
+                    <i class="fas fa-language"></i> عربي
+                </span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
