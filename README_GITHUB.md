@@ -1,6 +1,7 @@
 # 🏛️ نظام مسار القانوني | Legal Path System
 
 ## 📋 Live Demo
+
 **🌐 [View Live System](https://jawadsites.github.io/tests/)**
 
 ---
@@ -16,12 +17,14 @@
 ## ✨ Features | الميزات
 
 ### 🎨 **Perfect Health.sa Visual Identity Match**
+
 - ✅ **Health Sector Colors**: Authentic green palette (#00a651, #2e7d32, #4caf50)
 - ✅ **Arabic Typography**: Cairo & Tajawal fonts (same as health.sa)
 - ✅ **Professional Design**: Government health authority styling
 - ✅ **Saudi Branding**: Complete RTL Arabic interface
 
 ### 📋 **Complete Legal System**
+
 - ✅ **12 Navigation Sections**: Exactly matching PDF specifications
 - ✅ **Case Management**: Full CRUD operations for legal cases
 - ✅ **Session Tracking**: Detailed hearing management
@@ -30,6 +33,7 @@
 - ✅ **Reports**: Comprehensive case statistics
 
 ### 🔧 **Technical Features**
+
 - ✅ **Responsive Design**: Works on all devices
 - ✅ **Local Storage**: Data persistence
 - ✅ **Interactive Forms**: Full validation
@@ -41,11 +45,13 @@
 ## 🚀 **Quick Start | البدء السريع**
 
 ### **1. Access the System:**
+
 ```
 https://jawadsites.github.io/tests/
 ```
 
 ### **2. Navigate Through Sections:**
+
 - **الرئيسية** - Dashboard with statistics
 - **فتح قضية جديدة (الجهة)** - New case registration (Entity)
 - **تسجيل القضية (الممثل)** - Case registration (Representative)
@@ -54,8 +60,9 @@ https://jawadsites.github.io/tests/
 - **وأكثر...** - And more sections
 
 ### **3. Key Functions:**
+
 - **Register Cases**: Complete case information forms
-- **Track Sessions**: Manage hearing details and outcomes  
+- **Track Sessions**: Manage hearing details and outcomes
 - **Upload Documents**: Organize case files
 - **Generate Reports**: Export case data and statistics
 
@@ -64,18 +71,21 @@ https://jawadsites.github.io/tests/
 ## 📱 **Screenshots | لقطات الشاشة**
 
 ### 🏠 **Dashboard | الرئيسية**
+
 - Real-time case statistics
 - Quick access to recent cases
 - Notification center
 - Health.sa themed interface
 
 ### 📝 **Case Registration | تسجيل القضايا**
+
 - Complete form validation
 - PDF-matching field layout
 - Professional health styling
 - Arabic RTL interface
 
 ### 📊 **Active Cases Table | جدول القضايا النشطة**
+
 - Interactive data tables
 - Case status tracking
 - Session management buttons
@@ -86,6 +96,7 @@ https://jawadsites.github.io/tests/
 ## 🎨 **Design System | نظام التصميم**
 
 ### **Colors | الألوان:**
+
 ```css
 Primary Green: #00a651 (Health.sa main color)
 Secondary Green: #2e7d32 (Health sector dark)
@@ -94,6 +105,7 @@ Health Blue: #1976d2 (Institutional blue)
 ```
 
 ### **Typography | الخطوط:**
+
 ```css
 Primary: 'Cairo' (Arabic - same as health.sa)
 Secondary: 'Tajawal' (Arabic support)
@@ -101,6 +113,7 @@ Weights: 300, 400, 500, 600, 700, 800
 ```
 
 ### **Components | المكونات:**
+
 - Health-themed gradients
 - Professional button styling
 - Clean form layouts
@@ -139,14 +152,14 @@ tests/
 
 This system is **100% compliant** with the provided PDF specifications:
 
-| Element | PDF Requirement | Implementation |
-|---------|----------------|----------------|
-| **Navigation Menu** | 12 specific Arabic items | ✅ **Perfect Match** |
-| **Forms** | Exact field labels & layout | ✅ **Perfect Match** |
-| **Tables** | Specific column headers | ✅ **Perfect Match** |
-| **Colors** | Red/Blue/Green buttons | ✅ **Perfect Match** |
-| **Data Examples** | Specific test data | ✅ **Perfect Match** |
-| **Visual Identity** | Health.sa branding | ✅ **Perfect Match** |
+| Element             | PDF Requirement             | Implementation       |
+| ------------------- | --------------------------- | -------------------- |
+| **Navigation Menu** | 12 specific Arabic items    | ✅ **Perfect Match** |
+| **Forms**           | Exact field labels & layout | ✅ **Perfect Match** |
+| **Tables**          | Specific column headers     | ✅ **Perfect Match** |
+| **Colors**          | Red/Blue/Green buttons      | ✅ **Perfect Match** |
+| **Data Examples**   | Specific test data          | ✅ **Perfect Match** |
+| **Visual Identity** | Health.sa branding          | ✅ **Perfect Match** |
 
 ---
 
@@ -185,4 +198,4 @@ This project is created for demonstration purposes with respect to Saudi Health 
 **🏛️ نظام مسار القانوني - إدارة القضايا بكفاءة واحترافية**  
 **⚖️ Legal Path System - Professional Case Management**
 
-*Built with ❤️ for the Saudi legal sector using Health.sa visual identity*
+_Built with ❤️ for the Saudi legal sector using Health.sa visual identity_
