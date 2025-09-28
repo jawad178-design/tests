@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نظام مسار القانوني - النسخة المحدثة</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="legal-system-enhanced.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo-section">
+                <img src="file000000004b0862438e4aefa6c2e7e176.png" alt="الشعار" class="logo-img">
+                <h1>نظام مسار القانوني</h1>
+            </div>
+            <div class="user-section">
+                <i class="fas fa-user-circle"></i>
+                <span>المستخدم القانوني</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation Sidebar -->
+    <nav class="sidebar">
+        <div class="nav-header">
+            <h3>الرئيسية</h3>
+        </div>
+        <ul class="nav-menu">
+            <li><a href="#" onclick="showSection('dashboard')" class="nav-link active"><i class="fas fa-home"></i> الرئيسية</a></li>
+            <li><a href="#" onclick="showSection('notifications')" class="nav-link"><i class="fas fa-bell"></i> التبليغات</a></li>
+            <li><a href="#" onclick="showSection('new-case')" class="nav-link"><i class="fas fa-plus-circle"></i> فتح قضية جديدة (الجهة)</a></li>
+            <li><a href="#" onclick="showSection('case-registration')" class="nav-link"><i class="fas fa-edit"></i> تسجيل القضية (الممثل)</a></li>
+            <li><a href="#" onclick="showSection('active-cases')" class="nav-link"><i class="fas fa-folder-open"></i> القضايا المستلمة (النشطة والمنتهية)</a></li>
+            <li><a href="#" onclick="showSection('legal-consultations')" class="nav-link"><i class="fas fa-comments"></i> الاستشارات القانونية</a></li>
+            <li><a href="#" onclick="showSection('reports')" class="nav-link"><i class="fas fa-chart-bar"></i> المؤشرات والتقارير</a></li>
+            <li><a href="#" onclick="showSection('case-archive')" class="nav-link"><i class="fas fa-archive"></i> أرشيف القضايا</a></li>
+            <li><a href="#" onclick="showSection('pending-settings')" class="nav-link"><i class="fas fa-clock"></i> الإعدادات القائمة</a></li>
+            <li><a href="#" onclick="showSection('case-management')" class="nav-link"><i class="fas fa-cogs"></i> إدارة القضايا (المقر الرئيسي)</a></li>
+            <li><a href="#" onclick="showSection('legal-library')" class="nav-link"><i class="fas fa-book"></i> المكتبة القانونية</a></li>
+            <li><a href="#" onclick="showSection('legal-communications')" class="nav-link"><i class="fas fa-envelope"></i> التواصل القانوني</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Dashboard Section -->
+        <section id="dashboard" class="content-section active">
+            <div class="page-header">
+                <h2><i class="fas fa-home"></i> لوحة التحكم الرئيسية</h2>
+            </div>
+            <div class="dashboard-stats">
+                <div class="stat-card">
+                    <div class="stat-icon blue">
+                        <i class="fas fa-folder-open"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>القضايا النشطة</h3>
+                        <span class="stat-number">42</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon green">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>القضايا المنتهية</h3>
+                        <span class="stat-number">128</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon orange">
+                        <i class="fas fa-calendar"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>الجلسات هذا الأسبوع</h3>
+                        <span class="stat-number">15</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon purple">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>الاستشارات المعلقة</h3>
+                        <span class="stat-number">7</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- New Case Section - Matching PDF Design -->
+        <section id="new-case" class="content-section">
+            <div class="page-header">
+                <div class="header-navigation">
+                    <div class="nav-item active">الأسم</div>
+                    <div class="nav-item">التاريخ والوقت</div>
+                </div>
+                <h2>نظام مسار القانوني</h2>
+            </div>
+
+            <div class="case-form-container">
+                <div class="form-section">
+                    <div class="section-title">تظهر هنا التبليغات الخاصة بالموظف والقضايا المسندة له</div>
+                    <div class="notification-list">
+                        <div class="notification-item">
+                            <span class="notification-number">1.</span>
+                            <span class="notification-text">أي قضية جديد تسند للممثل</span>
+                        </div>
+                        <div class="notification-item">
+                            <span class="notification-number">2.</span>
+                            <span class="notification-text">مواعيد الجلسات (تذكير قبل الجلسة بـ 3 أيام)</span>
+                        </div>
+                        <div class="notification-item">
+                            <span class="notification-number">3.</span>
+                            <span class="notification-text">أي إغلاق لقضية أو قفلها</span>
+                        </div>
+                        <div class="notification-item">
+                            <span class="notification-number">4.</span>
+                            <span class="notification-text">تبليغ موجه من جهة العمل للممثل القانونية (رسائل)</span>
+                        </div>
+                    </div>
+
+                    <div class="case-table-section">
+                        <h3 class="table-title">قضية جديدة</h3>
+                        <table class="case-table">
+                            <thead>
+                                <tr>
+                                    <th>رقم القضية</th>
+                                    <th>موعد أول جلسة</th>
+                                    <th>المحكمة</th>
+                                    <th>فتح وتسجيل</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>رقم القضية</td>
+                                    <td>موعد أول جلسة</td>
+                                    <td>المحكمة</td>
+                                    <td><button class="btn-red">فتح وتسجيل</button></td>
+                                </tr>
+                                <tr>
+                                    <td>رقم القضية</td>
+                                    <td>موعد أول جلسة</td>
+                                    <td>المحكمة</td>
+                                    <td><button class="btn-red">فتح وتسجيل</button></td>
+                                </tr>
+                                <tr>
+                                    <td>رقم القضية</td>
+                                    <td>موعد أول جلسة</td>
+                                    <td>المحكمة</td>
+                                    <td><button class="btn-red">فتح وتسجيل</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Case Registration Section - Matching PDF Form -->
+        <section id="case-registration" class="content-section">
+            <div class="page-header">
+                <div class="header-navigation">
+                    <div class="nav-item">تاريخ ووقت</div>
+                </div>
+                <h2>نظام مسار القانوني</h2>
+            </div>
+
+            <div class="case-form-container">
+                <div class="case-registration-form">
+                    <div class="form-header">
+                        <h3>اسم الجهة: (ثابت حسب النوع)</h3>
+                    </div>
+                    
+                    <div class="form-fields">
+                        <div class="form-field">
+                            <label>تاريخ ورود الإيميل:</label>
+                            <input type="date" class="form-input">
+                        </div>
+                        <div class="form-field">
+                            <label>وقت ورود الإيميل:</label>
+                            <input type="time" class="form-input">
+                        </div>
+                        <div class="form-field">
+                            <label>رقم القضية:</label>
+                            <input type="text" class="form-input">
+                        </div>
+                        <div class="form-field">
+                            <label>المحكمة:</label>
+                            <input type="text" class="form-input">
+                        </div>
+                        <div class="form-field">
+                            <label>الدائرة:</label>
+                            <input type="text" class="form-input">
+                        </div>
+                        <div class="form-field">
+                            <label>الجهة المختصة: (من هنا تحال للفروع أو المقر الرئيسي)</label>
+                            <input type="text" class="form-input">
+                        </div>
+                        <div class="form-field">
+                            <label>موعد أول جلسة:</label>
+                            <input type="datetime-local" class="form-input">
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button class="btn-blue">تعديل</button>
+                        <button class="btn-red">فتح وإحالة</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Detailed Case Registration Form -->
+        <section id="detailed-registration" class="content-section">
+            <div class="page-header">
+                <div class="header-navigation">
+                    <div class="nav-item">حفظ</div>
+                    <div class="nav-item">تاريخ ووقت</div>
+                </div>
+                <h2>نظام مسار القانوني</h2>
+            </div>
+
+            <div class="case-form-container">
+                <div class="detailed-form">
+                    <div class="form-note">
+                        <span>اسم: (ثابت حسب النوع)</span><br>
+                        <span>اسم الممثل: (ثابت حسب النوع)</span>
+                    </div>
+                    
+                    <div class="form-fields-detailed">
+                        <div class="form-row">
+                            <div class="form-field">
+                                <label>تاريخ ورود الإيميل:</label>
+                                <input type="date" class="form-input">
+                            </div>
+                            <div class="form-field">
+                                <label>وقت ورود الإيميل:</label>
+                                <input type="time" class="form-input">
+                            </div>
+                        </div>
+                        <div class="form-field">
+                            <label>رقم القضية:</label>
+                            <input type="text" class="form-input">
+                        </div>
+                        <div class="form-field">
+                            <label>المحكمة:</label>
+                            <input type="text" class="form-input">
+                        </div>
+                        <div class="form-field">
+                            <label>الدائرة:</label>
+                            <input type="text" class="form-input">
+                        </div>
+                        <div class="form-field">
+                            <label>الجهة المختصة: (من هنا تحال للفروع أو المقر الرئيسي)</label>
+                            <input type="text" class="form-input">
+                        </div>
+                        <div class="form-field">
+                            <label>موعد أول جلسة:</label>
+                            <input type="datetime-local" class="form-input">
+                        </div>
+                        <div class="form-field">
+                            <label>نوع القضية:</label>
+                            <select class="form-input">
+                                <option>مدني</option>
+                                <option>جزائي</option>
+                                <option>تجاري</option>
+                                <option>عمالي</option>
+                            </select>
+                        </div>
+                        <div class="form-field">
+                            <label>نوع المطالبة:</label>
+                            <select class="form-input">
+                                <option>مالية</option>
+                                <option>معنوية</option>
+                                <option>عينية</option>
+                            </select>
+                        </div>
+                        <div class="form-field">
+                            <label>مبلغ المطالبة:</label>
+                            <input type="number" class="form-input">
+                        </div>
+                        <div class="form-field">
+                            <label>اسم المدعي عليه:</label>
+                            <input type="text" class="form-input">
+                        </div>
+                        <div class="form-field">
+                            <label>رقم هويته:</label>
+                            <input type="text" class="form-input">
+                        </div>
+                        <div class="form-field">
+                            <label>نوع وظيفته:</label>
+                            <select class="form-input">
+                                <option>مدني</option>
+                                <option>عسكري</option>
+                                <option>متقاعد</option>
+                            </select>
+                        </div>
+                        <div class="form-field">
+                            <label>مسمى وظيفته:</label>
+                            <input type="text" class="form-input">
+                        </div>
+                        <div class="form-field">
+                            <label>الإدارة العمل فيها:</label>
+                            <input type="text" class="form-input">
+                        </div>
+                        <div class="form-field full-width">
+                            <label>لائحة الدعوى: (نص مطول)</label>
+                            <textarea class="form-input" rows="4"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button class="btn-blue">تعديل</button>
+                        <button class="btn-red">خطأ</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Active Cases Section - Matching PDF Table -->
+        <section id="active-cases" class="content-section">
+            <div class="page-header">
+                <h2>نظام مسار القانوني</h2>
+                <div class="case-type-selector">
+                    <span>اسم: (ثابت حسب النوع)</span><br>
+                    <span>اسم الممثل: (ثابت حسب النوع)</span>
+                </div>
+            </div>
+
+            <div class="cases-table-container">
+                <table class="enhanced-cases-table">
+                    <thead>
+                        <tr>
+                            <th>رقم القضية</th>
+                            <th>الدائرة</th>
+                            <th>المدعي</th>
+                            <th>رقم هويته</th>
+                            <th>اسم الممثل</th>
+                            <th>رقم الجلسة</th>
+                            <th>تاريخ ووقت الجلسة</th>
+                            <th>الإجراءات</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>578987</td>
+                            <td>المحكمة المدنية</td>
+                            <td>خالد محمد</td>
+                            <td>1088899488</td>
+                            <td>محمد أحمد</td>
+                            <td>3</td>
+                            <td>3فبراير/2024م-11:30</td>
+                            <td><button class="btn-green">فتح وتحديث</button></td>
+                        </tr>
+                        <tr>
+                            <td>578987</td>
+                            <td>المحكمة المدنية</td>
+                            <td>خالد محمد</td>
+                            <td>1088899488</td>
+                            <td>محمد أحمد</td>
+                            <td>4</td>
+                            <td>4فبراير/2024م-11:30</td>
+                            <td><button class="btn-green">فتح وتحديث</button></td>
+                        </tr>
+                        <tr>
+                            <td>578987</td>
+                            <td>المحكمة المدنية</td>
+                            <td>خالد محمد</td>
+                            <td>1088899488</td>
+                            <td>محمد أحمد</td>
+                            <td>5</td>
+                            <td>5فبراير/2024م-11:30</td>
+                            <td><button class="btn-green">فتح وتحديث</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Session Details Modal -->
+        <section id="session-details" class="content-section">
+            <div class="page-header">
+                <h2>نظام مسار القانوني</h2>
+                <div class="case-info">
+                    <span>اسم: (ثابت حسب النوع)</span><br>
+                    <span>اسم الممثل: (ثابت حسب النوع)</span>
+                </div>
+            </div>
+
+            <div class="session-form-container">
+                <div class="session-details-form">
+                    <div class="session-info">
+                        <div class="info-row">
+                            <label>نوع القضية:</label>
+                            <span>مدني وطعون</span>
+                        </div>
+                        <div class="info-row">
+                            <label>نوع المطالبة:</label>
+                            <span>مالية</span>
+                        </div>
+                        <div class="info-row">
+                            <label>اسم المدعي عليه:</label>
+                            <span>خالد محمد</span>
+                        </div>
+                        <div class="info-row">
+                            <label>لائحة الدعوى:</label>
+                            <span>تفاصيل الدعوى...</span>
+                        </div>
+                    </div>
+
+                    <div class="session-entry">
+                        <div class="session-number">
+                            <label>رقم الجلسة (1)</label>
+                        </div>
+                        <div class="session-fields">
+                            <div class="form-field">
+                                <label>ملخص الجلسة:</label>
+                                <textarea class="form-input" rows="3"></textarea>
+                            </div>
+                            <div class="form-field">
+                                <label>طلبات القاضي:</label>
+                                <textarea class="form-input" rows="2"></textarea>
+                            </div>
+                            <div class="form-field">
+                                <label>ملاحظات الممثل:</label>
+                                <textarea class="form-input" rows="2"></textarea>
+                            </div>
+                            <div class="form-field">
+                                <label>تاريخ موعد الجلسة القادم:</label>
+                                <input type="datetime-local" class="form-input">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button class="btn-green">تحديث</button>
+                        <button class="btn-red">إغلاق القضية</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Other sections can be added here following similar patterns -->
+        <section id="notifications" class="content-section">
+            <div class="page-header">
+                <h2><i class="fas fa-bell"></i> التبليغات</h2>
+            </div>
+            <div class="placeholder-content">
+                <p>قسم التبليغات قيد التطوير</p>
+            </div>
+        </section>
+
+        <section id="legal-consultations" class="content-section">
+            <div class="page-header">
+                <h2><i class="fas fa-comments"></i> الاستشارات القانونية</h2>
+            </div>
+            <div class="placeholder-content">
+                <p>قسم الاستشارات القانونية قيد التطوير</p>
+            </div>
+        </section>
+
+        <section id="reports" class="content-section">
+            <div class="page-header">
+                <h2><i class="fas fa-chart-bar"></i> المؤشرات والتقارير</h2>
+            </div>
+            <div class="placeholder-content">
+                <p>قسم التقارير قيد التطوير</p>
+            </div>
+        </section>
+
+        <section id="case-archive" class="content-section">
+            <div class="page-header">
+                <h2><i class="fas fa-archive"></i> أرشيف القضايا</h2>
+            </div>
+            <div class="placeholder-content">
+                <p>أرشيف القضايا قيد التطوير</p>
+            </div>
+        </section>
+
+        <section id="pending-settings" class="content-section">
+            <div class="page-header">
+                <h2><i class="fas fa-clock"></i> الإعدادات القائمة</h2>
+            </div>
+            <div class="placeholder-content">
+                <p>الإعدادات قيد التطوير</p>
+            </div>
+        </section>
+
+        <section id="case-management" class="content-section">
+            <div class="page-header">
+                <h2><i class="fas fa-cogs"></i> إدارة القضايا (المقر الرئيسي)</h2>
+            </div>
+            <div class="placeholder-content">
+                <p>إدارة القضايا قيد التطوير</p>
+            </div>
+        </section>
+
+        <section id="legal-library" class="content-section">
+            <div class="page-header">
+                <h2><i class="fas fa-book"></i> المكتبة القانونية</h2>
+            </div>
+            <div class="placeholder-content">
+                <p>المكتبة القانونية قيد التطوير</p>
+            </div>
+        </section>
+
+        <section id="legal-communications" class="content-section">
+            <div class="page-header">
+                <h2><i class="fas fa-envelope"></i> التواصل القانوني</h2>
+            </div>
+            <div class="placeholder-content">
+                <p>التواصل القانوني قيد التطوير</p>
+            </div>
+        </section>
+    </main>
+
+    <script src="legal-system-enhanced.js"></script>
+</body>
+</html>
