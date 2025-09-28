@@ -577,18 +577,183 @@ body::before {
 .stat-icon.blue { background: var(--health-accent-blue); }
 .stat-icon.green { background: var(--health-primary-teal); }
 .stat-icon.orange { background: var(--warning-orange); }
-.stat-icon.purple { background: var(--health-secondary); }
+.stat-icon.purple { background: var(--health-secondary-blue); }
+.stat-icon.teal { background: var(--health-light-teal); }
+.stat-icon.red { background: var(--danger-red); }
+.stat-icon.navy { background: var(--health-secondary-blue); }
+.stat-icon.amber { background: #F59E0B; }
+.stat-icon.gold { background: #D97706; }
 
-.stat-info h3 {
+.stat-info h3,
+.stat-info h4 {
     font-size: 1rem;
     color: var(--text-gray);
     margin-bottom: 0.25rem;
+    font-weight: 600;
 }
 
 .stat-number {
     font-size: 2rem;
     font-weight: 700;
     color: var(--text-dark);
+}
+
+/* Enhanced Dashboard Styles */
+.dashboard-date {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--health-primary-teal);
+    font-weight: 600;
+}
+
+.kpi-section {
+    margin-bottom: 3rem;
+}
+
+.section-title {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--health-secondary-blue);
+    margin-bottom: 1.5rem;
+    padding: 1rem 2rem 0;
+    border-bottom: 2px solid var(--health-light-teal);
+    padding-bottom: 0.5rem;
+}
+
+.section-title i {
+    color: var(--health-primary-teal);
+}
+
+/* Stat Card Enhancements */
+.stat-trend {
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-top: 0.25rem;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.stat-trend.positive {
+    color: var(--success-green);
+}
+
+.stat-trend.negative {
+    color: var(--danger-red);
+}
+
+.stat-percentage {
+    font-size: 0.9rem;
+    color: var(--health-primary-teal);
+    font-weight: 600;
+    margin-top: 0.25rem;
+}
+
+.stat-detail {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    margin-top: 0.25rem;
+}
+
+/* Primary Stats Grid */
+.primary-stats .stat-card {
+    border-left: 4px solid var(--health-primary-teal);
+}
+
+.case-types .stat-card {
+    border-left: 4px solid var(--health-light-teal);
+}
+
+.time-metrics .stat-card {
+    border-left: 4px solid var(--health-accent-blue);
+}
+
+.financial-metrics .stat-card {
+    border-left: 4px solid var(--success-green);
+}
+
+.team-metrics .stat-card {
+    border-left: 4px solid var(--health-secondary-blue);
+}
+
+.quality-metrics .stat-card {
+    border-left: 4px solid var(--warning-orange);
+}
+
+.risk-metrics .stat-card {
+    border-left: 4px solid var(--danger-red);
+}
+
+/* Quick Actions Grid */
+.quick-actions-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    padding: 0 2rem;
+}
+
+.quick-action-btn {
+    background: linear-gradient(135deg, var(--health-primary-teal), var(--health-light-teal));
+    color: var(--health-white);
+    border: none;
+    padding: 1.5rem;
+    border-radius: var(--border-radius);
+    font-family: var(--font-arabic);
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    box-shadow: var(--shadow-light);
+}
+
+.quick-action-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-hover);
+    background: linear-gradient(135deg, var(--health-light-teal), var(--health-primary-teal));
+}
+
+.quick-action-btn i {
+    font-size: 1.5rem;
+}
+
+/* Enhanced responsive design for KPIs */
+@media (max-width: 768px) {
+    .dashboard-stats {
+        grid-template-columns: 1fr;
+        padding: 1rem;
+    }
+    
+    .section-title {
+        font-size: 1.1rem;
+        padding: 0.5rem 1rem 0;
+    }
+    
+    .stat-card {
+        padding: 1rem;
+    }
+    
+    .stat-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 1.2rem;
+    }
+    
+    .stat-number {
+        font-size: 1.5rem;
+    }
+    
+    .quick-actions-grid {
+        grid-template-columns: 1fr;
+        padding: 0 1rem;
+    }
 }
 
 /* Case Form Container */
@@ -1074,5 +1239,219 @@ body::before {
         display: block !important;
         box-shadow: none;
         border: 1px solid var(--border-light);
+    }
+}
+
+/* Report Modal Styles */
+.report-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.report-modal.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.report-modal-content {
+    background: var(--health-white);
+    border-radius: var(--border-radius-large);
+    width: 90%;
+    max-width: 600px;
+    max-height: 80vh;
+    overflow-y: auto;
+    box-shadow: var(--shadow-hover);
+    transform: translateY(-50px);
+    transition: transform 0.3s ease;
+}
+
+.report-modal.show .report-modal-content {
+    transform: translateY(0);
+}
+
+.report-header {
+    background: linear-gradient(135deg, var(--health-primary-teal), var(--health-light-teal));
+    color: var(--health-white);
+    padding: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: var(--border-radius-large) var(--border-radius-large) 0 0;
+}
+
+.report-header h3 {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1.3rem;
+}
+
+.close-modal {
+    background: none;
+    border: none;
+    color: var(--health-white);
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 50%;
+    transition: background-color 0.3s ease;
+}
+
+.close-modal:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.report-body {
+    padding: 2rem;
+}
+
+.report-summary {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.summary-item {
+    background: var(--bg-light);
+    padding: 1rem;
+    border-radius: var(--border-radius);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-left: 3px solid var(--health-primary-teal);
+}
+
+.summary-label {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.summary-value {
+    color: var(--health-primary-teal);
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+
+.report-chart-placeholder {
+    background: var(--bg-light);
+    border: 2px dashed var(--border-medium);
+    border-radius: var(--border-radius);
+    padding: 3rem;
+    text-align: center;
+    color: var(--text-secondary);
+}
+
+.report-chart-placeholder i {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    color: var(--health-primary-teal);
+}
+
+.report-footer {
+    padding: 1.5rem 2rem;
+    border-top: 1px solid var(--border-light);
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
+}
+
+/* Notification System Styles */
+.notification {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    background: var(--health-white);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-hover);
+    z-index: 10001;
+    transform: translateX(-100%);
+    opacity: 0;
+    transition: all 0.3s ease;
+    min-width: 300px;
+    max-width: 400px;
+}
+
+.notification.show {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+.notification.info {
+    border-left: 4px solid var(--info-blue);
+}
+
+.notification.success {
+    border-left: 4px solid var(--success-green);
+}
+
+.notification.warning {
+    border-left: 4px solid var(--warning-orange);
+}
+
+.notification.error {
+    border-left: 4px solid var(--danger-red);
+}
+
+.notification-content {
+    padding: 1rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+}
+
+.notification-message {
+    font-family: var(--font-arabic);
+    font-size: 0.9rem;
+    color: var(--text-primary);
+}
+
+.notification-close {
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    cursor: pointer;
+    padding: 0.25rem;
+    border-radius: 50%;
+    transition: background-color 0.3s ease;
+}
+
+.notification-close:hover {
+    background: var(--bg-light);
+}
+
+/* Mobile Responsive for Modal and Notifications */
+@media (max-width: 768px) {
+    .report-modal-content {
+        width: 95%;
+        margin: 1rem;
+    }
+    
+    .report-summary {
+        grid-template-columns: 1fr;
+    }
+    
+    .report-footer {
+        flex-direction: column;
+    }
+    
+    .notification {
+        left: 10px;
+        right: 10px;
+        min-width: auto;
+        max-width: none;
     }
 }

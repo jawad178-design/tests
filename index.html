@@ -77,44 +77,370 @@
         <!-- Dashboard Section -->
         <section id="dashboard" class="content-section active">
             <div class="page-header">
-                <h2><i class="fas fa-home"></i> لوحة التحكم الرئيسية</h2>
+                <h2><i class="fas fa-home"></i> لوحة التحكم الرئيسية - مؤشرات الأداء الشاملة</h2>
+                <div class="dashboard-date">
+                    <i class="fas fa-calendar-alt"></i>
+                    <span id="currentDate"></span>
+                </div>
             </div>
-            <div class="dashboard-stats">
-                <div class="stat-card">
-                    <div class="stat-icon blue">
-                        <i class="fas fa-folder-open"></i>
+
+            <!-- Primary KPIs - الإحصائيات الأساسية -->
+            <div class="kpi-section">
+                <h3 class="section-title"><i class="fas fa-chart-line"></i> المؤشرات الأساسية للأداء</h3>
+                <div class="dashboard-stats primary-stats">
+                    <div class="stat-card">
+                        <div class="stat-icon blue">
+                            <i class="fas fa-folder-open"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h4>إجمالي القضايا النشطة</h4>
+                            <span class="stat-number">156</span>
+                            <div class="stat-trend positive">
+                                <i class="fas fa-arrow-up"></i> +12%
+                            </div>
+                        </div>
                     </div>
-                    <div class="stat-info">
-                        <h3>القضايا النشطة</h3>
-                        <span class="stat-number">42</span>
+                    <div class="stat-card">
+                        <div class="stat-icon green">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h4>القضايا المنجزة</h4>
+                            <span class="stat-number">342</span>
+                            <div class="stat-trend positive">
+                                <i class="fas fa-arrow-up"></i> +8%
+                            </div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon orange">
+                            <i class="fas fa-hourglass-half"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h4>القضايا المعلقة</h4>
+                            <span class="stat-number">28</span>
+                            <div class="stat-trend negative">
+                                <i class="fas fa-arrow-down"></i> -5%
+                            </div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon purple">
+                            <i class="fas fa-percentage"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h4>معدل النجاح</h4>
+                            <span class="stat-number">87%</span>
+                            <div class="stat-trend positive">
+                                <i class="fas fa-arrow-up"></i> +3%
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="stat-card">
-                    <div class="stat-icon green">
-                        <i class="fas fa-check-circle"></i>
+            </div>
+
+            <!-- Case Type Analysis - تحليل أنواع القضايا -->
+            <div class="kpi-section">
+                <h3 class="section-title"><i class="fas fa-chart-pie"></i> تحليل أنواع القضايا</h3>
+                <div class="dashboard-stats case-types">
+                    <div class="stat-card">
+                        <div class="stat-icon teal">
+                            <i class="fas fa-handshake"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h4>قضايا عقود وتجارية</h4>
+                            <span class="stat-number">89</span>
+                            <div class="stat-percentage">34%</div>
+                        </div>
                     </div>
-                    <div class="stat-info">
-                        <h3>القضايا المنتهية</h3>
-                        <span class="stat-number">128</span>
+                    <div class="stat-card">
+                        <div class="stat-icon red">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h4>قضايا إدارية</h4>
+                            <span class="stat-number">67</span>
+                            <div class="stat-percentage">25%</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon navy">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h4>قضايا عمالية</h4>
+                            <span class="stat-number">45</span>
+                            <div class="stat-percentage">17%</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon amber">
+                            <i class="fas fa-clipboard-list"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h4>قضايا أخرى</h4>
+                            <span class="stat-number">63</span>
+                            <div class="stat-percentage">24%</div>
+                        </div>
                     </div>
                 </div>
-                <div class="stat-card">
-                    <div class="stat-icon orange">
-                        <i class="fas fa-calendar"></i>
+            </div>
+
+            <!-- Time Performance - مؤشرات الوقت -->
+            <div class="kpi-section">
+                <h3 class="section-title"><i class="fas fa-clock"></i> مؤشرات الأداء الزمني</h3>
+                <div class="dashboard-stats time-metrics">
+                    <div class="stat-card">
+                        <div class="stat-icon blue">
+                            <i class="fas fa-calendar-week"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h4>الجلسات هذا الأسبوع</h4>
+                            <span class="stat-number">23</span>
+                            <div class="stat-detail">من أصل 28 مجدولة</div>
+                        </div>
                     </div>
-                    <div class="stat-info">
-                        <h3>الجلسات هذا الأسبوع</h3>
-                        <span class="stat-number">15</span>
+                    <div class="stat-card">
+                        <div class="stat-icon green">
+                            <i class="fas fa-stopwatch"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h4>متوسط وقت القضية</h4>
+                            <span class="stat-number">45</span>
+                            <div class="stat-detail">يوم</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon orange">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h4>القضايا المتأخرة</h4>
+                            <span class="stat-number">12</span>
+                            <div class="stat-detail">تحتاج متابعة</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon purple">
+                            <i class="fas fa-calendar-check"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h4>الالتزام بالمواعيد</h4>
+                            <span class="stat-number">94%</span>
+                            <div class="stat-detail">معدل ممتاز</div>
+                        </div>
                     </div>
                 </div>
-                <div class="stat-card">
-                    <div class="stat-icon purple">
-                        <i class="fas fa-comments"></i>
+            </div>
+
+            <!-- Financial Performance - المؤشرات المالية -->
+            <div class="kpi-section">
+                <h3 class="section-title"><i class="fas fa-dollar-sign"></i> المؤشرات المالية والتكاليف</h3>
+                <div class="dashboard-stats financial-metrics">
+                    <div class="stat-card">
+                        <div class="stat-icon green">
+                            <i class="fas fa-money-bill-wave"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h4>الوفورات المحققة</h4>
+                            <span class="stat-number">2.4M</span>
+                            <div class="stat-detail">ريال سعودي</div>
+                        </div>
                     </div>
-                    <div class="stat-info">
-                        <h3>الاستشارات المعلقة</h3>
-                        <span class="stat-number">7</span>
+                    <div class="stat-card">
+                        <div class="stat-icon blue">
+                            <i class="fas fa-chart-bar"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h4>تكلفة القضايا</h4>
+                            <span class="stat-number">890K</span>
+                            <div class="stat-detail">ريال سعودي</div>
+                        </div>
                     </div>
+                    <div class="stat-card">
+                        <div class="stat-icon purple">
+                            <i class="fas fa-balance-scale"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h4>معدل العائد</h4>
+                            <span class="stat-number">3.2x</span>
+                            <div class="stat-detail">مقابل التكلفة</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon red">
+                            <i class="fas fa-exclamation"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h4>المطالبات المعلقة</h4>
+                            <span class="stat-number">450K</span>
+                            <div class="stat-detail">ريال سعودي</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Team Performance - أداء الفريق -->
+            <div class="kpi-section">
+                <h3 class="section-title"><i class="fas fa-users-cog"></i> مؤشرات أداء الفريق</h3>
+                <div class="dashboard-stats team-metrics">
+                    <div class="stat-card">
+                        <div class="stat-icon teal">
+                            <i class="fas fa-user-tie"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h4>المحامون النشطون</h4>
+                            <span class="stat-number">12</span>
+                            <div class="stat-detail">من أصل 15</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon navy">
+                            <i class="fas fa-tasks"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h4>متوسط الحمولة</h4>
+                            <span class="stat-number">13</span>
+                            <div class="stat-detail">قضية لكل محامي</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon amber">
+                            <i class="fas fa-trophy"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h4>أعلى أداء</h4>
+                            <span class="stat-number">95%</span>
+                            <div class="stat-detail">نسبة نجاح</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon green">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h4>ساعات التدريب</h4>
+                            <span class="stat-number">180</span>
+                            <div class="stat-detail">هذا الربع</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quality Metrics - مؤشرات الجودة -->
+            <div class="kpi-section">
+                <h3 class="section-title"><i class="fas fa-star"></i> مؤشرات الجودة والرضا</h3>
+                <div class="dashboard-stats quality-metrics">
+                    <div class="stat-card">
+                        <div class="stat-icon gold">
+                            <i class="fas fa-smile"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h4>رضا العملاء</h4>
+                            <span class="stat-number">4.8</span>
+                            <div class="stat-detail">من 5.0</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon green">
+                            <i class="fas fa-award"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h4>معدل الجودة</h4>
+                            <span class="stat-number">92%</span>
+                            <div class="stat-detail">مراجعة داخلية</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon blue">
+                            <i class="fas fa-redo-alt"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h4>القضايا المعاد فتحها</h4>
+                            <span class="stat-number">3%</span>
+                            <div class="stat-detail">معدل منخفض</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon purple">
+                            <i class="fas fa-comments"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h4>التقييمات الإيجابية</h4>
+                            <span class="stat-number">89%</span>
+                            <div class="stat-detail">من العملاء</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Risk and Compliance - المخاطر والامتثال -->
+            <div class="kpi-section">
+                <h3 class="section-title"><i class="fas fa-shield-alt"></i> إدارة المخاطر والامتثال</h3>
+                <div class="dashboard-stats risk-metrics">
+                    <div class="stat-card">
+                        <div class="stat-icon red">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h4>المخاطر العالية</h4>
+                            <span class="stat-number">5</span>
+                            <div class="stat-detail">قضايا حرجة</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon orange">
+                            <i class="fas fa-file-contract"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h4>مراجعة العقود</h4>
+                            <span class="stat-number">98%</span>
+                            <div class="stat-detail">معدل الامتثال</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon navy">
+                            <i class="fas fa-gavel"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h4>الأحكام المستأنفة</h4>
+                            <span class="stat-number">7</span>
+                            <div class="stat-detail">قيد المراجعة</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon green">
+                            <i class="fas fa-check-double"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h4>معدل الامتثال</h4>
+                            <span class="stat-number">96%</span>
+                            <div class="stat-detail">للوائح</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Actions Dashboard -->
+            <div class="kpi-section">
+                <h3 class="section-title"><i class="fas fa-bolt"></i> الإجراءات السريعة</h3>
+                <div class="quick-actions-grid">
+                    <button class="quick-action-btn" onclick="showSection('new-case')">
+                        <i class="fas fa-plus-circle"></i>
+                        <span>قضية جديدة</span>
+                    </button>
+                    <button class="quick-action-btn" onclick="showSection('cases-list')">
+                        <i class="fas fa-list"></i>
+                        <span>عرض القضايا</span>
+                    </button>
+                    <button class="quick-action-btn" onclick="showSection('sessions')">
+                        <i class="fas fa-calendar-plus"></i>
+                        <span>إضافة جلسة</span>
+                    </button>
+                    <button class="quick-action-btn" onclick="generateReport()">
+                        <i class="fas fa-chart-line"></i>
+                        <span>تقرير سريع</span>
+                    </button>
                 </div>
             </div>
         </section>

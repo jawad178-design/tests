@@ -71,10 +71,79 @@ function completePreloader() {
 // Initialize System
 function initializeSystem() {
     console.log('🏛️ نظام مسار القانوني - تم التحميل بنجاح');
+    updateCurrentDate();
     loadDashboardData();
     setupEventListeners();
     showSection('dashboard');
     loadSampleData();
+    initializeKPIAnimations();
+    startKPIUpdates(); // Start periodic updates
+}
+
+// Update Current Date
+function updateCurrentDate() {
+    const dateElement = document.getElementById('currentDate');
+    if (dateElement) {
+        const now = new Date();
+        const options = { 
+            weekday: 'long', 
+            year: 'numeric', 
+            month: 'long', 
+            day: 'numeric',
+            timeZone: 'Asia/Riyadh'
+        };
+        dateElement.textContent = now.toLocaleDateString('ar-SA', options);
+    }
+}
+
+// Initialize KPI Animations
+function initializeKPIAnimations() {
+    // Animate stat numbers when they come into view
+    const observerOptions = {
+        threshold: 0.3,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                animateStatNumber(entry.target);
+            }
+        });
+    }, observerOptions);
+
+    // Observe all stat numbers
+    document.querySelectorAll('.stat-number').forEach(stat => {
+        observer.observe(stat);
+    });
+}
+
+// Animate Stat Numbers
+function animateStatNumber(element) {
+    const finalValue = element.textContent;
+    const numericValue = parseInt(finalValue.replace(/[^\d]/g, ''));
+    
+    if (isNaN(numericValue)) return;
+    
+    const duration = 1500; // 1.5 seconds
+    const steps = 60;
+    const increment = numericValue / steps;
+    let current = 0;
+    let step = 0;
+    
+    const timer = setInterval(() => {
+        step++;
+        current += increment;
+        
+        if (step >= steps) {
+            clearInterval(timer);
+            element.textContent = finalValue;
+        } else {
+            const displayValue = Math.floor(current);
+            const suffix = finalValue.replace(/[\d,]/g, '');
+            element.textContent = displayValue.toLocaleString('ar-SA') + suffix;
+        }
+    }, duration / steps);
 }
 
 // Navigation Functions
@@ -130,6 +199,172 @@ function loadSectionData(sectionId) {
             break;
         default:
             console.log(`Loading data for ${sectionId}`);
+    }
+}
+
+// Generate Quick Report Function
+function generateReport() {
+    showNotification('🔄 جاري إنشاء التقرير السريع...', 'info');
+    
+    // Simulate report generation
+    setTimeout(() => {
+        const reportData = {
+            totalCases: 156,
+            completedCases: 342,
+            pendingCases: 28,
+            successRate: 87,
+            avgCaseTime: 45,
+            clientSatisfaction: 4.8,
+            teamPerformance: 94,
+            financialSavings: '2.4M',
+            riskCases: 5
+        };
+        
+        displayQuickReport(reportData);
+        showNotification('✅ تم إنشاء التقرير بنجاح!', 'success');
+    }, 2000);
+}
+
+// Display Quick Report
+function displayQuickReport(data) {
+    const reportModal = createReportModal(data);
+    document.body.appendChild(reportModal);
+    
+    // Show modal with animation
+    setTimeout(() => {
+        reportModal.classList.add('show');
+    }, 100);
+}
+
+// Create Report Modal
+function createReportModal(data) {
+    const modal = document.createElement('div');
+    modal.className = 'report-modal';
+    modal.innerHTML = `
+        <div class="report-modal-content">
+            <div class="report-header">
+                <h3><i class="fas fa-chart-bar"></i> التقرير السريع للأداء</h3>
+                <button class="close-modal" onclick="closeReportModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="report-body">
+                <div class="report-summary">
+                    <div class="summary-item">
+                        <span class="summary-label">إجمالي القضايا:</span>
+                        <span class="summary-value">${data.totalCases}</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">معدل النجاح:</span>
+                        <span class="summary-value">${data.successRate}%</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">رضا العملاء:</span>
+                        <span class="summary-value">${data.clientSatisfaction}/5.0</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">الوفورات المحققة:</span>
+                        <span class="summary-value">${data.financialSavings} ريال</span>
+                    </div>
+                </div>
+                <div class="report-chart-placeholder">
+                    <i class="fas fa-chart-line"></i>
+                    <p>مخطط الأداء الشهري</p>
+                </div>
+            </div>
+            <div class="report-footer">
+                <button class="btn-blue" onclick="downloadReport()">
+                    <i class="fas fa-download"></i> تحميل التقرير
+                </button>
+                <button class="btn-green" onclick="emailReport()">
+                    <i class="fas fa-envelope"></i> إرسال بالبريد
+                </button>
+            </div>
+        </div>
+    `;
+    return modal;
+}
+
+// Close Report Modal
+function closeReportModal() {
+    const modal = document.querySelector('.report-modal');
+    if (modal) {
+        modal.classList.remove('show');
+        setTimeout(() => {
+            modal.remove();
+        }, 300);
+    }
+}
+
+// Download Report
+function downloadReport() {
+    showNotification('📥 جاري تحميل التقرير...', 'info');
+    setTimeout(() => {
+        showNotification('✅ تم تحميل التقرير بنجاح!', 'success');
+        closeReportModal();
+    }, 1500);
+}
+
+// Email Report
+function emailReport() {
+    showNotification('📧 جاري إرسال التقرير بالبريد الإلكتروني...', 'info');
+    setTimeout(() => {
+        showNotification('✅ تم إرسال التقرير بنجاح!', 'success');
+        closeReportModal();
+    }, 2000);
+}
+
+// Enhanced Notification System
+function showNotification(message, type = 'info', duration = 4000) {
+    const notification = document.createElement('div');
+    notification.className = `notification ${type}`;
+    notification.innerHTML = `
+        <div class="notification-content">
+            <span class="notification-message">${message}</span>
+            <button class="notification-close" onclick="this.parentElement.parentElement.remove()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+    `;
+    
+    document.body.appendChild(notification);
+    
+    // Show notification with animation
+    setTimeout(() => {
+        notification.classList.add('show');
+    }, 100);
+    
+    // Auto remove after duration
+    setTimeout(() => {
+        if (notification.parentNode) {
+            notification.classList.remove('show');
+            setTimeout(() => {
+                notification.remove();
+            }, 300);
+        }
+    }, duration);
+}
+
+// Update KPI values periodically (simulated real-time updates)
+function startKPIUpdates() {
+    setInterval(() => {
+        updateRandomKPIs();
+    }, 30000); // Update every 30 seconds
+}
+
+// Update Random KPIs
+function updateRandomKPIs() {
+    const statNumbers = document.querySelectorAll('.stat-number');
+    const randomStat = statNumbers[Math.floor(Math.random() * statNumbers.length)];
+    
+    if (randomStat) {
+        const currentValue = parseInt(randomStat.textContent.replace(/[^\d]/g, ''));
+        if (!isNaN(currentValue)) {
+            const variation = Math.floor(Math.random() * 5) - 2; // -2 to +2
+            const newValue = Math.max(0, currentValue + variation);
+            const suffix = randomStat.textContent.replace(/[\d,]/g, '');
+            randomStat.textContent = newValue.toLocaleString('ar-SA') + suffix;
+        }
     }
 }
 
