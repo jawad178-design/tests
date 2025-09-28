@@ -48,6 +48,265 @@
     --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* Preloader Styles - Health.sa Inspired Design */
+.preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: linear-gradient(135deg, var(--health-primary-teal), var(--health-light-teal));
+    background-size: 400% 400%;
+    animation: gradientShift 4s ease infinite;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+.preloader::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.03) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+.preloader.fade-out {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.preloader-content {
+    text-align: center;
+    color: var(--health-white);
+    max-width: 400px;
+    padding: 2rem;
+    position: relative;
+    z-index: 1;
+}
+
+.preloader-logo {
+    position: relative;
+    margin-bottom: 2rem;
+    display: inline-block;
+}
+
+.logo-animation {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    animation: logoFloat 2s ease-in-out infinite alternate;
+    filter: drop-shadow(0 10px 20px rgba(255, 255, 255, 0.3));
+    box-shadow: 0 0 30px rgba(255, 255, 255, 0.2);
+}
+
+.logo-pulse {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100px;
+    height: 100px;
+    border: 2px solid var(--health-white);
+    border-radius: 50%;
+    opacity: 0.3;
+    animation: pulse 2s infinite;
+}
+
+.logo-pulse::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    border: 1px solid var(--health-white);
+    border-radius: 50%;
+    opacity: 0.2;
+    animation: pulse 2s infinite 0.5s;
+}
+
+.loading-text h2 {
+    font-family: var(--font-arabic);
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    letter-spacing: 1px;
+}
+
+.loading-text p {
+    font-family: var(--font-arabic);
+    font-size: 1rem;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+    animation: textFade 2s ease-in-out infinite alternate;
+}
+
+.loading-spinner {
+    position: relative;
+    margin: 2rem auto;
+    width: 60px;
+    height: 60px;
+}
+
+.spinner-ring {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    border: 3px solid transparent;
+    border-top: 3px solid var(--health-white);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+.spinner-ring::before {
+    content: '';
+    position: absolute;
+    top: -6px;
+    left: -6px;
+    right: -6px;
+    bottom: -6px;
+    border: 2px solid transparent;
+    border-right: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    animation: spin 2s linear infinite reverse;
+}
+
+.spinner-dots {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    gap: 4px;
+}
+
+.dot {
+    width: 6px;
+    height: 6px;
+    background: var(--health-white);
+    border-radius: 50%;
+    animation: bounce 1.4s infinite ease-in-out;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+.dot1 { animation-delay: -0.32s; }
+.dot2 { animation-delay: -0.16s; }
+.dot3 { animation-delay: 0s; }
+
+.loading-progress {
+    margin-top: 2rem;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 2px;
+    overflow: hidden;
+    margin-bottom: 0.5rem;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--health-white), rgba(255, 255, 255, 0.8), var(--health-white));
+    background-size: 200% 100%;
+    border-radius: 2px;
+    width: 0%;
+    animation: progressLoad 3s ease-in-out, shimmer 1.5s ease-in-out infinite;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.6);
+}
+
+.progress-text {
+    font-family: var(--font-arabic);
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Preloader Animations */
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+@keyframes logoFloat {
+    0% { transform: translateY(0px) scale(1); }
+    100% { transform: translateY(-10px) scale(1.05); }
+}
+
+@keyframes pulse {
+    0% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0.3;
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1.1);
+        opacity: 0.1;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(1.2);
+        opacity: 0;
+    }
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes bounce {
+    0%, 80%, 100% {
+        transform: scale(0);
+        opacity: 0.5;
+    }
+    40% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes textFade {
+    0% { opacity: 0.7; }
+    100% { opacity: 1; }
+}
+
+@keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+}
+
+@keyframes progressLoad {
+    0% { width: 0%; }
+    20% { width: 25%; }
+    40% { width: 50%; }
+    60% { width: 75%; }
+    80% { width: 90%; }
+    100% { width: 100%; }
+}
+
+/* Hide main content while preloader is active */
+body.preloader-active {
+    overflow: hidden;
+}
+
+body.preloader-active .header,
+body.preloader-active .sidebar,
+body.preloader-active .main-content {
+    display: none;
+}
+
 /* Global Styles with Health.sa Typography */
 * {
     margin: 0;
@@ -736,6 +995,40 @@ body::before {
 }
 
 @media (max-width: 480px) {
+    /* Preloader responsive adjustments */
+    .preloader-content {
+        padding: 1rem;
+        max-width: 300px;
+    }
+    
+    .logo-animation {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .logo-pulse {
+        width: 80px;
+        height: 80px;
+    }
+    
+    .loading-text h2 {
+        font-size: 1.4rem;
+    }
+    
+    .loading-text p {
+        font-size: 0.9rem;
+    }
+    
+    .loading-spinner {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .spinner-ring {
+        width: 50px;
+        height: 50px;
+    }
+    
     .stat-card {
         flex-direction: column;
         text-align: center;

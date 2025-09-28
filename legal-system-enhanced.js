@@ -7,16 +7,72 @@ let casesData = [];
 let sessionsData = [];
 let currentCaseId = null;
 
+// Preloader Management
+let preloaderProgress = 0;
+let preloaderInterval;
+
 // Initialize System
 document.addEventListener('DOMContentLoaded', function() {
-    initializeSystem();
-    loadDashboardData();
-    setupEventListeners();
+    // Add preloader-active class to body
+    document.body.classList.add('preloader-active');
+    
+    // Start preloader
+    startPreloader();
 });
+
+// Preloader Functions
+function startPreloader() {
+    const progressFill = document.querySelector('.progress-fill');
+    const progressText = document.querySelector('.progress-text');
+    
+    preloaderInterval = setInterval(() => {
+        preloaderProgress += Math.random() * 15 + 5; // Random increment between 5-20
+        
+        if (preloaderProgress >= 100) {
+            preloaderProgress = 100;
+            clearInterval(preloaderInterval);
+            
+            // Complete loading after a short delay
+            setTimeout(() => {
+                completePreloader();
+            }, 500);
+        }
+        
+        // Update progress bar and text
+        if (progressFill) {
+            progressFill.style.width = preloaderProgress + '%';
+        }
+        if (progressText) {
+            progressText.textContent = Math.round(preloaderProgress) + '%';
+        }
+        
+    }, 200); // Update every 200ms
+}
+
+function completePreloader() {
+    const preloader = document.getElementById('preloader');
+    
+    if (preloader) {
+        preloader.classList.add('fade-out');
+        
+        // Remove preloader and initialize system after fade out
+        setTimeout(() => {
+            preloader.remove();
+            document.body.classList.remove('preloader-active');
+            initializeSystem();
+        }, 500);
+    } else {
+        // Fallback if preloader element not found
+        document.body.classList.remove('preloader-active');
+        initializeSystem();
+    }
+}
 
 // Initialize System
 function initializeSystem() {
     console.log('🏛️ نظام مسار القانوني - تم التحميل بنجاح');
+    loadDashboardData();
+    setupEventListeners();
     showSection('dashboard');
     loadSampleData();
 }
