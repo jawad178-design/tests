@@ -1,61 +1,74 @@
-/* نظام مسار القانوني - المطابق لهوية شركة الصحة القابضة الفعلية */
-/* Legal System Enhanced - Matching Actual Health.sa Visual Identity */
+/* نظام مسار القانوني - بألوان البانتون الجديدة */
+/* Legal System Enhanced - New Pantone Color Palette */
 
-/* CSS Variables - Actual Health.sa Colors from Screenshots */
+/* CSS Variables - New Pantone Color Palette */
 :root {
-    /* الألوان الأساسية الفعلية لشركة الصحة القابضة */
-    --health-primary-teal: #008B8B;      /* التركوازي الأساسي - Primary Teal */
-    --health-light-teal: #20B2AA;        /* التركوازي الفاتح - Light Teal */
-    --health-secondary-blue: #1E3A8A;    /* الأزرق الداكن - Deep Blue */
-    --health-accent-blue: #3B82F6;       /* الأزرق الفاتح - Light Blue */
+    /* Main Brand Colors - الألوان الأساسية للعلامة التجارية */
+    --brand-bright-blue: #2FA9E0;       /* Pantone 2985C - Bright Sky Blue */
+    --brand-medium-blue: #1691D0;       /* Pantone 299C - Medium Blue */
+    --brand-deep-navy: #15508A;         /* Pantone 2736C - Deep Navy Blue */
     
-    /* الألوان المساعدة الفعلية */
-    --health-white: #FFFFFF;             /* الأبيض */
-    --health-light-gray: #F8F9FA;        /* الرمادي الفاتح */
-    --health-medium-gray: #6B7280;       /* الرمادي المتوسط */
-    --health-dark-gray: #1F2937;         /* الرمادي الداكن */
+    /* Accent Colors - الألوان المساعدة */
+    --accent-rich-blue: #114AD2;        /* Pantone 229C - Rich Blue */
+    --accent-teal-blue: #057590;        /* Pantone 3145C - Teal Blue */
+    --accent-aqua: #3AC0C3;             /* Pantone 7479C - Aqua/Cyan */
     
-    /* ألوان النظام */
-    --success-green: #10B981;
-    --warning-orange: #F59E0B;
-    --danger-red: #EF4444;
-    --info-blue: #3B82F6;
+    /* Support Colors - الألوان الداعمة */
+    --support-green: #48AD48;           /* Pantone 802C - Green */
+    --support-lime: #9ECC3B;            /* Pantone 375C - Lime Green */
     
-    /* الخلفيات والنصوص */
+    /* Neutral Colors - الألوان المحايدة */
+    --neutral-gray: #A09EA9;            /* Pantone 7543C - Gray Tone */
+    --neutral-white: #FFFFFF;           /* White */
+    --neutral-light-gray: #F9F9F9;      /* Light Background */
+    
+    /* Semantic Colors - الألوان الدلالية */
+    --success-color: #48AD48;           /* Green for Success */
+    --warning-color: #9ECC3B;           /* Lime for Warning/Highlight */
+    --danger-color: #EF4444;            /* Red for Errors */
+    --info-color: #1691D0;              /* Medium Blue for Info */
+    
+    /* Background Colors - ألوان الخلفيات */
     --bg-primary: #FFFFFF;
-    --bg-secondary: #F8F9FA;
-    --bg-light: #F9FAFB;
+    --bg-secondary: #F9F9F9;
+    --bg-light: #FAFAFA;
     --bg-card: #FFFFFF;
+    --bg-accent: rgba(47, 169, 224, 0.05);  /* Light brand blue background */
     
-    --text-primary: #1F2937;
-    --text-secondary: #6B7280;
-    --text-light: #9CA3AF;
+    /* Text Colors - ألوان النصوص */
+    --text-primary: #15508A;            /* Deep Navy for Headings */
+    --text-secondary: #057590;          /* Teal Blue for Secondary Text */
+    --text-muted: #A09EA9;              /* Gray for Muted Text */
+    --text-white: #FFFFFF;              /* White Text */
     
+    /* Border Colors - ألوان الحدود */
     --border-light: #E5E7EB;
-    --border-medium: #D1D5DB;
+    --border-medium: #A09EA9;
+    --border-accent: #3AC0C3;
     
-    /* الظلال */
-    --shadow-light: 0 1px 3px rgba(0, 139, 139, 0.1);
-    --shadow-medium: 0 4px 6px rgba(0, 139, 139, 0.1);
-    --shadow-hover: 0 8px 25px rgba(0, 139, 139, 0.15);
+    /* Shadow Colors - ألوان الظلال */
+    --shadow-light: 0 1px 3px rgba(47, 169, 224, 0.1);
+    --shadow-medium: 0 4px 6px rgba(47, 169, 224, 0.15);
+    --shadow-hover: 0 8px 25px rgba(47, 169, 224, 0.2);
     
-    /* الخطوط المطابقة لـ health.sa الفعلية */
+    /* Typography - الخطوط */
     --font-arabic: 'Cairo', 'Tajawal', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     --font-english: 'Inter', 'Arial', 'Helvetica', sans-serif;
     
+    /* Spacing & Borders - المسافات والحدود */
     --border-radius: 8px;
     --border-radius-large: 12px;
     --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Preloader Styles - Health.sa Inspired Design */
+/* Preloader Styles - New Pantone Color Scheme */
 .preloader {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100vh;
-    background: linear-gradient(135deg, var(--health-primary-teal), var(--health-light-teal));
+    background: linear-gradient(135deg, var(--brand-deep-navy), var(--brand-medium-blue));
     background-size: 400% 400%;
     animation: gradientShift 4s ease infinite;
     display: flex;
@@ -74,8 +87,8 @@
     height: 100%;
     background: 
         radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
-        radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.05) 0%, transparent 50%),
-        radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.03) 0%, transparent 50%);
+        radial-gradient(circle at 80% 80%, rgba(58, 192, 195, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 50% 50%, rgba(47, 169, 224, 0.05) 0%, transparent 50%);
     pointer-events: none;
 }
 
@@ -86,7 +99,7 @@
 
 .preloader-content {
     text-align: center;
-    color: var(--health-white);
+    color: var(--text-white);
     max-width: 400px;
     padding: 2rem;
     position: relative;
@@ -316,14 +329,14 @@ body.preloader-active .main-content {
 
 body {
     font-family: var(--font-arabic);
-    background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-light) 100%);
+    background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
     color: var(--text-primary);
     direction: rtl;
     line-height: 1.6;
     font-size: 16px;
 }
 
-/* Add health.sa inspired background pattern matching screenshots */
+/* Add Pantone inspired background pattern */
 body::before {
     content: '';
     position: fixed;
@@ -332,17 +345,17 @@ body::before {
     width: 100%;
     height: 100%;
     background: 
-        radial-gradient(circle at 20% 20%, rgba(0, 139, 139, 0.03) 0%, transparent 50%),
-        radial-gradient(circle at 80% 80%, rgba(30, 58, 138, 0.03) 0%, transparent 50%),
-        radial-gradient(circle at 50% 50%, rgba(32, 178, 170, 0.02) 0%, transparent 50%);
+        radial-gradient(circle at 20% 20%, rgba(47, 169, 224, 0.03) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(21, 80, 138, 0.03) 0%, transparent 50%),
+        radial-gradient(circle at 50% 50%, rgba(58, 192, 195, 0.02) 0%, transparent 50%);
     pointer-events: none;
     z-index: -1;
 }
 
-/* Header - Exact Health.sa Style from Screenshots */
+/* Header - New Pantone Color Scheme */
 .header {
-    background: linear-gradient(135deg, var(--health-primary-teal), var(--health-light-teal));
-    color: var(--health-white);
+    background: linear-gradient(135deg, var(--brand-medium-blue), var(--brand-bright-blue));
+    color: var(--text-white);
     padding: 1rem 2rem;
     box-shadow: var(--shadow-medium);
     position: fixed;
@@ -350,7 +363,7 @@ body::before {
     right: 0;
     left: 0;
     z-index: 100;
-    border-bottom: 3px solid var(--health-light-teal);
+    border-bottom: 3px solid var(--accent-aqua);
 }
 
 .header::before {
@@ -361,11 +374,11 @@ body::before {
     right: 0;
     height: 3px;
     background: linear-gradient(90deg, 
-        var(--health-primary-teal) 0%, 
-        var(--health-light-teal) 25%, 
-        var(--health-accent-blue) 50%, 
-        var(--health-light-teal) 75%, 
-        var(--health-primary-teal) 100%);
+        var(--brand-medium-blue) 0%, 
+        var(--accent-aqua) 25%, 
+        var(--brand-bright-blue) 50%, 
+        var(--accent-aqua) 75%, 
+        var(--brand-medium-blue) 100%);
 }
 
 .header-content {
@@ -451,8 +464,8 @@ body::before {
 
 .nav-link:hover,
 .nav-link.active {
-    background: linear-gradient(135deg, var(--health-primary-teal), var(--health-light-teal));
-    color: var(--health-white);
+    background: linear-gradient(135deg, var(--brand-medium-blue), var(--brand-bright-blue));
+    color: var(--text-white);
     border-radius: var(--border-radius);
     box-shadow: var(--shadow-light);
 }
@@ -492,7 +505,7 @@ body::before {
 }
 
 .page-header {
-    background: linear-gradient(135deg, #f8f9fa 0%, rgba(0, 139, 139, 0.05) 100%);
+    background: linear-gradient(135deg, #f9f9f9 0%, rgba(47, 169, 224, 0.05) 100%);
     padding: 1.5rem 2rem;
     border-bottom: 2px solid rgba(0, 166, 81, 0.1);
     display: flex;
@@ -510,7 +523,7 @@ body::before {
 }
 
 .page-header h2 i {
-    color: var(--health-primary-teal);
+    color: var(--brand-medium-blue);
 }
 
 .header-navigation {
@@ -520,8 +533,8 @@ body::before {
 
 .nav-item {
     padding: 0.5rem 1rem;
-    background: linear-gradient(135deg, var(--health-accent-blue), var(--health-secondary-blue));
-    color: var(--health-white);
+    background: linear-gradient(135deg, var(--brand-bright-blue), var(--brand-deep-navy));
+    color: var(--text-white);
     border-radius: var(--border-radius);
     font-size: 0.9rem;
     cursor: pointer;
@@ -530,7 +543,7 @@ body::before {
 }
 
 .nav-item.active {
-    background: linear-gradient(135deg, var(--health-primary-teal), var(--health-light-teal));
+    background: linear-gradient(135deg, var(--brand-medium-blue), var(--accent-aqua));
     transform: scale(1.05);
 }
 
@@ -574,15 +587,15 @@ body::before {
     color: white;
 }
 
-.stat-icon.blue { background: var(--health-accent-blue); }
-.stat-icon.green { background: var(--health-primary-teal); }
-.stat-icon.orange { background: var(--warning-orange); }
-.stat-icon.purple { background: var(--health-secondary-blue); }
-.stat-icon.teal { background: var(--health-light-teal); }
-.stat-icon.red { background: var(--danger-red); }
-.stat-icon.navy { background: var(--health-secondary-blue); }
-.stat-icon.amber { background: #F59E0B; }
-.stat-icon.gold { background: #D97706; }
+.stat-icon.blue { background: var(--brand-bright-blue); }
+.stat-icon.green { background: var(--support-green); }
+.stat-icon.orange { background: var(--support-lime); }
+.stat-icon.purple { background: var(--accent-rich-blue); }
+.stat-icon.teal { background: var(--accent-teal-blue); }
+.stat-icon.red { background: var(--danger-color); }
+.stat-icon.navy { background: var(--brand-deep-navy); }
+.stat-icon.amber { background: var(--support-lime); }
+.stat-icon.gold { background: var(--warning-color); }
 
 .stat-info h3,
 .stat-info h4 {
@@ -603,7 +616,7 @@ body::before {
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    color: var(--health-primary-teal);
+    color: var(--brand-medium-blue);
     font-weight: 600;
 }
 
@@ -617,15 +630,15 @@ body::before {
     gap: 0.75rem;
     font-size: 1.3rem;
     font-weight: 700;
-    color: var(--health-secondary-blue);
+    color: var(--brand-deep-navy);
     margin-bottom: 1.5rem;
     padding: 1rem 2rem 0;
-    border-bottom: 2px solid var(--health-light-teal);
+    border-bottom: 2px solid var(--accent-aqua);
     padding-bottom: 0.5rem;
 }
 
 .section-title i {
-    color: var(--health-primary-teal);
+    color: var(--brand-medium-blue);
 }
 
 /* Stat Card Enhancements */
@@ -639,53 +652,53 @@ body::before {
 }
 
 .stat-trend.positive {
-    color: var(--success-green);
+    color: var(--support-green);
 }
 
 .stat-trend.negative {
-    color: var(--danger-red);
+    color: var(--danger-color);
 }
 
 .stat-percentage {
     font-size: 0.9rem;
-    color: var(--health-primary-teal);
+    color: var(--brand-medium-blue);
     font-weight: 600;
     margin-top: 0.25rem;
 }
 
 .stat-detail {
     font-size: 0.8rem;
-    color: var(--text-secondary);
+    color: var(--text-muted);
     margin-top: 0.25rem;
 }
 
 /* Primary Stats Grid */
 .primary-stats .stat-card {
-    border-left: 4px solid var(--health-primary-teal);
+    border-left: 4px solid var(--brand-medium-blue);
 }
 
 .case-types .stat-card {
-    border-left: 4px solid var(--health-light-teal);
+    border-left: 4px solid var(--accent-aqua);
 }
 
 .time-metrics .stat-card {
-    border-left: 4px solid var(--health-accent-blue);
+    border-left: 4px solid var(--brand-bright-blue);
 }
 
 .financial-metrics .stat-card {
-    border-left: 4px solid var(--success-green);
+    border-left: 4px solid var(--support-green);
 }
 
 .team-metrics .stat-card {
-    border-left: 4px solid var(--health-secondary-blue);
+    border-left: 4px solid var(--brand-deep-navy);
 }
 
 .quality-metrics .stat-card {
-    border-left: 4px solid var(--warning-orange);
+    border-left: 4px solid var(--support-lime);
 }
 
 .risk-metrics .stat-card {
-    border-left: 4px solid var(--danger-red);
+    border-left: 4px solid var(--danger-color);
 }
 
 /* Quick Actions Grid */
@@ -697,8 +710,8 @@ body::before {
 }
 
 .quick-action-btn {
-    background: linear-gradient(135deg, var(--health-primary-teal), var(--health-light-teal));
-    color: var(--health-white);
+    background: linear-gradient(135deg, var(--brand-medium-blue), var(--accent-aqua));
+    color: var(--text-white);
     border: none;
     padding: 1.5rem;
     border-radius: var(--border-radius);
@@ -717,7 +730,7 @@ body::before {
 .quick-action-btn:hover {
     transform: translateY(-2px);
     box-shadow: var(--shadow-hover);
-    background: linear-gradient(135deg, var(--health-light-teal), var(--health-primary-teal));
+    background: linear-gradient(135deg, var(--brand-bright-blue), var(--brand-medium-blue));
 }
 
 .quick-action-btn i {
@@ -802,7 +815,7 @@ body::before {
 
 .notification-number {
     font-weight: 600;
-    color: var(--health-primary-teal);
+    color: var(--brand-medium-blue);
     min-width: 20px;
 }
 
@@ -846,8 +859,8 @@ body::before {
 
 .case-table th,
 .enhanced-cases-table th {
-    background: linear-gradient(135deg, var(--health-primary-teal), var(--health-light-teal));
-    color: var(--health-white);
+    background: linear-gradient(135deg, var(--brand-medium-blue), var(--accent-aqua));
+    color: var(--text-white);
     font-weight: 600;
     font-size: 0.9rem;
 }
@@ -878,32 +891,32 @@ body::before {
 }
 
 .btn-red {
-    background: var(--danger-red);
-    color: white;
+    background: var(--danger-color);
+    color: var(--text-white);
 }
 
 .btn-red:hover {
-    background: #b91c1c;
+    background: #dc2626;
 }
 
 .btn-blue {
-    background: linear-gradient(135deg, var(--health-accent-blue), var(--health-secondary-blue));
-    color: var(--health-white);
+    background: linear-gradient(135deg, var(--brand-medium-blue), var(--brand-deep-navy));
+    color: var(--text-white);
 }
 
 .btn-blue:hover {
-    background: linear-gradient(135deg, var(--health-secondary-blue), var(--health-accent-blue));
+    background: linear-gradient(135deg, var(--brand-bright-blue), var(--brand-medium-blue));
     transform: translateY(-1px);
     box-shadow: var(--shadow-medium);
 }
 
 .btn-green {
-    background: linear-gradient(135deg, var(--health-primary-teal), var(--health-light-teal));
-    color: var(--health-white);
+    background: linear-gradient(135deg, var(--support-green), var(--accent-teal-blue));
+    color: var(--text-white);
 }
 
 .btn-green:hover {
-    background: linear-gradient(135deg, var(--health-light-teal), var(--health-primary-teal));
+    background: linear-gradient(135deg, var(--accent-aqua), var(--support-green));
     transform: translateY(-1px);
     box-shadow: var(--shadow-medium);
 }
@@ -980,11 +993,11 @@ body::before {
 
 /* Form Notes */
 .form-note {
-    background: var(--bg-white);
+    background: var(--bg-card);
     padding: 1rem;
     border-radius: 4px;
     margin-bottom: 2rem;
-    border-left: 4px solid var(--health-primary);
+    border-left: 4px solid var(--brand-medium-blue);
     color: var(--text-primary);
     font-size: 0.9rem;
     box-shadow: var(--shadow-light);
@@ -1281,8 +1294,8 @@ body::before {
 }
 
 .report-header {
-    background: linear-gradient(135deg, var(--health-primary-teal), var(--health-light-teal));
-    color: var(--health-white);
+    background: linear-gradient(135deg, var(--brand-medium-blue), var(--accent-aqua));
+    color: var(--text-white);
     padding: 1.5rem;
     display: flex;
     justify-content: space-between;
@@ -1331,7 +1344,7 @@ body::before {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-left: 3px solid var(--health-primary-teal);
+    border-left: 3px solid var(--brand-medium-blue);
 }
 
 .summary-label {
@@ -1340,7 +1353,7 @@ body::before {
 }
 
 .summary-value {
-    color: var(--health-primary-teal);
+    color: var(--brand-medium-blue);
     font-weight: 700;
     font-size: 1.1rem;
 }
@@ -1351,13 +1364,13 @@ body::before {
     border-radius: var(--border-radius);
     padding: 3rem;
     text-align: center;
-    color: var(--text-secondary);
+    color: var(--text-muted);
 }
 
 .report-chart-placeholder i {
     font-size: 3rem;
     margin-bottom: 1rem;
-    color: var(--health-primary-teal);
+    color: var(--brand-medium-blue);
 }
 
 .report-footer {
@@ -1390,19 +1403,19 @@ body::before {
 }
 
 .notification.info {
-    border-left: 4px solid var(--info-blue);
+    border-left: 4px solid var(--info-color);
 }
 
 .notification.success {
-    border-left: 4px solid var(--success-green);
+    border-left: 4px solid var(--success-color);
 }
 
 .notification.warning {
-    border-left: 4px solid var(--warning-orange);
+    border-left: 4px solid var(--warning-color);
 }
 
 .notification.error {
-    border-left: 4px solid var(--danger-red);
+    border-left: 4px solid var(--danger-color);
 }
 
 .notification-content {
