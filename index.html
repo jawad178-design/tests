@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>نظام مسار القانوني - النسخة المحدثة</title>
+        <title>نظام سند القانوني - إدارة القضايا القانونية</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="legal-system-enhanced.css">
@@ -17,7 +17,7 @@
                 <div class="logo-pulse"></div>
             </div>
             <div class="loading-text">
-                <h2>نظام مسار القانوني</h2>
+                <h2>نظام سند القانوني</h2>
                 <p>جاري تحميل النظام...</p>
             </div>
             <div class="loading-spinner">
@@ -42,17 +42,28 @@
         <div class="header-content">
             <div class="logo-section">
                 <img src="file000000004b0862438e4aefa6c2e7e176.png" alt="الشعار" class="logo-img">
-                <h1>نظام مسار القانوني</h1>
+                <h1>نظام سند القانوني</h1>
             </div>
-            <div class="user-section">
-                <i class="fas fa-user-circle"></i>
-                <span>المستخدم القانوني</span>
+            <div class="header-actions">
+                <!-- Hamburger Menu Button -->
+                <button class="hamburger-menu" id="hamburgerBtn" onclick="toggleSidebar()" aria-label="تبديل القائمة الجانبية">
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                </button>
+                <div class="user-section">
+                    <i class="fas fa-user-circle"></i>
+                    <span class="user-name">المستخدم القانوني</span>
+                </div>
             </div>
         </div>
     </header>
 
+    <!-- Navigation Overlay for Mobile -->
+    <div class="nav-overlay" id="navOverlay" onclick="closeSidebar()"></div>
+    
     <!-- Navigation Sidebar -->
-    <nav class="sidebar">
+    <nav class="sidebar" id="sidebar">
         <div class="nav-header">
             <h3>الرئيسية</h3>
         </div>
@@ -802,76 +813,1471 @@
         <section id="notifications" class="content-section">
             <div class="page-header">
                 <h2><i class="fas fa-bell"></i> التبليغات</h2>
+                <div class="header-navigation">
+                    <div class="nav-item active">كافة التبليغات</div>
+                    <div class="nav-item">غير المقروءة</div>
+                    <div class="nav-item">المهمة</div>
+                    <div class="nav-item">المؤرشفة</div>
+                </div>
             </div>
-            <div class="placeholder-content">
-                <p>قسم التبليغات قيد التطوير</p>
+            
+            <div class="notifications-container" style="padding: 2rem;">
+                <!-- Notifications Statistics -->
+                <div class="dashboard-stats" style="margin-bottom: 2rem;">
+                    <div class="stat-card">
+                        <div class="stat-icon red">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h4>التبليغات العاجلة</h4>
+                            <div class="stat-number">7</div>
+                            <div class="stat-detail">تتطلب إجراء فوري</div>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon blue">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h4>غير المقروءة</h4>
+                            <div class="stat-number">23</div>
+                            <div class="stat-detail">تبليغات جديدة</div>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon green">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h4>المعالجة اليوم</h4>
+                            <div class="stat-number">15</div>
+                            <div class="stat-detail">تم إجراء العمل المطلوب</div>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon orange">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h4>مواعيد مستحقة</h4>
+                            <div class="stat-number">4</div>
+                            <div class="stat-detail">خلال الـ24 ساعة القادمة</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Quick Actions -->
+                <div class="quick-actions-grid" style="margin-bottom: 2rem;">
+                    <button class="quick-action-btn" onclick="markAllAsRead()">
+                        <i class="fas fa-check-double"></i>
+                        وضع علامة مقروء للكل
+                    </button>
+                    <button class="quick-action-btn" onclick="filterUrgent()">
+                        <i class="fas fa-filter"></i>
+                        عرض العاجلة فقط
+                    </button>
+                    <button class="quick-action-btn" onclick="archiveRead()">
+                        <i class="fas fa-archive"></i>
+                        أرشفة المقروءة
+                    </button>
+                    <button class="quick-action-btn" onclick="createNotification()">
+                        <i class="fas fa-plus"></i>
+                        إنشاء تبليغ جديد
+                    </button>
+                </div>
+                
+                <!-- Notifications List -->
+                <div class="notifications-list">
+                    <h3 style="color: var(--brand-deep-navy); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.5rem;">
+                        <i class="fas fa-bell"></i> قائمة التبليغات
+                    </h3>
+                    
+                    <!-- Notification Item 1 - Urgent -->
+                    <div class="notification-item urgent unread" style="background: var(--bg-white); border: 1px solid #EF4444; border-left: 4px solid #EF4444; padding: 1.5rem; margin-bottom: 1rem; border-radius: var(--border-radius); box-shadow: var(--shadow-light);">
+                        <div class="notification-header" style="display: flex; justify-content: between; align-items: center; margin-bottom: 1rem;">
+                            <div class="notification-meta" style="display: flex; align-items: center; gap: 1rem; flex: 1;">
+                                <span class="notification-type urgent" style="background: #EF4444; color: white; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.8rem; font-weight: 600;">عاجل</span>
+                                <span class="notification-time" style="color: var(--text-muted); font-size: 0.9rem;">منذ 10 دقائق</span>
+                                <span class="notification-status unread" style="background: var(--brand-medium-blue); color: white; padding: 0.2rem 0.6rem; border-radius: 15px; font-size: 0.75rem;">غير مقروء</span>
+                            </div>
+                            <div class="notification-actions" style="display: flex; gap: 0.5rem;">
+                                <button class="btn-blue" style="padding: 0.25rem 0.5rem; font-size: 0.8rem;">علامة مقروء</button>
+                                <button class="btn-red" style="padding: 0.25rem 0.5rem; font-size: 0.8rem;">حذف</button>
+                            </div>
+                        </div>
+                        <div class="notification-content">
+                            <h4 style="color: var(--brand-deep-navy); margin-bottom: 0.5rem;">موعد جلسة عاجل - القضية CS-2024-007</h4>
+                            <p style="color: var(--text-primary); line-height: 1.5; margin-bottom: 0.75rem;">تم تحديد موعد جلسة طارئة للقضية CS-2024-007 (نزاع تجاري - شركة الرياض للتجارة) يوم غداً الموافق 1 أكتوبر 2024 في تمام الساعة 10:00 صباحاً بمحكمة الرياض التجارية. يرجى تحضير الملفات والمستندات اللازمة.</p>
+                            <div class="notification-footer" style="display: flex; justify-content: space-between; align-items: center; padding-top: 0.75rem; border-top: 1px solid var(--border-light);">
+                                <span style="color: var(--text-muted); font-size: 0.85rem;">من: إدارة المحاكم</span>
+                                <button class="btn-blue" style="padding: 0.4rem 1rem; font-size: 0.85rem;">عرض التفاصيل</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Notification Item 2 - Important -->
+                    <div class="notification-item important unread" style="background: var(--bg-white); border: 1px solid var(--support-lime); border-left: 4px solid var(--support-lime); padding: 1.5rem; margin-bottom: 1rem; border-radius: var(--border-radius); box-shadow: var(--shadow-light);">
+                        <div class="notification-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                            <div class="notification-meta" style="display: flex; align-items: center; gap: 1rem; flex: 1;">
+                                <span class="notification-type important" style="background: var(--support-lime); color: white; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.8rem; font-weight: 600;">مهم</span>
+                                <span class="notification-time" style="color: var(--text-muted); font-size: 0.9rem;">منذ 2 ساعة</span>
+                                <span class="notification-status unread" style="background: var(--brand-medium-blue); color: white; padding: 0.2rem 0.6rem; border-radius: 15px; font-size: 0.75rem;">غير مقروء</span>
+                            </div>
+                            <div class="notification-actions" style="display: flex; gap: 0.5rem;">
+                                <button class="btn-blue" style="padding: 0.25rem 0.5rem; font-size: 0.8rem;">علامة مقروء</button>
+                                <button class="btn-green" style="padding: 0.25rem 0.5rem; font-size: 0.8rem;">أرشفة</button>
+                            </div>
+                        </div>
+                        <div class="notification-content">
+                            <h4 style="color: var(--brand-deep-navy); margin-bottom: 0.5rem;">تحديث حالة القضية - CS-2024-003</h4>
+                            <p style="color: var(--text-primary); line-height: 1.5; margin-bottom: 0.75rem;">تم تحديث حالة القضية CS-2024-003 (تأسيس شركة ذات مسؤولية محدودة) إلى "قيد المراجعة النهائية". تم رفع التقرير القانوني النهائي ومراجعة كافة الوثائق. متوقع صدور القرار خلال 48 ساعة.</p>
+                            <div class="notification-footer" style="display: flex; justify-content: space-between; align-items: center; padding-top: 0.75rem; border-top: 1px solid var(--border-light);">
+                                <span style="color: var(--text-muted); font-size: 0.85rem;">من: د. محمد الشهري - المستشار القانوني</span>
+                                <button class="btn-blue" style="padding: 0.4rem 1rem; font-size: 0.85rem;">عرض القضية</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Notification Item 3 - Normal -->
+                    <div class="notification-item normal read" style="background: var(--bg-light); border: 1px solid var(--border-light); border-left: 4px solid var(--brand-medium-blue); padding: 1.5rem; margin-bottom: 1rem; border-radius: var(--border-radius); opacity: 0.8;">
+                        <div class="notification-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                            <div class="notification-meta" style="display: flex; align-items: center; gap: 1rem; flex: 1;">
+                                <span class="notification-type normal" style="background: var(--brand-medium-blue); color: white; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.8rem; font-weight: 600;">عادي</span>
+                                <span class="notification-time" style="color: var(--text-muted); font-size: 0.9rem;">منذ 5 ساعات</span>
+                                <span class="notification-status read" style="background: var(--support-green); color: white; padding: 0.2rem 0.6rem; border-radius: 15px; font-size: 0.75rem;">مقروء</span>
+                            </div>
+                            <div class="notification-actions" style="display: flex; gap: 0.5rem;">
+                                <button class="btn-green" style="padding: 0.25rem 0.5rem; font-size: 0.8rem;">أرشفة</button>
+                            </div>
+                        </div>
+                        <div class="notification-content">
+                            <h4 style="color: var(--brand-deep-navy); margin-bottom: 0.5rem;">تأكيد استلام الاستشارة القانونية - CS-2024-005</h4>
+                            <p style="color: var(--text-primary); line-height: 1.5; margin-bottom: 0.75rem;">تم استلام طلب الاستشارة القانونية الخاص بقضية الاختلاس المالي CS-2024-005. تم تعيين د. خالد المطيري كمستشار مسؤول. سيتم التواصل معكم خلال 24 ساعة لتحديد موعد الاستشارة.</p>
+                            <div class="notification-footer" style="display: flex; justify-content: space-between; align-items: center; padding-top: 0.75rem; border-top: 1px solid var(--border-light);">
+                                <span style="color: var(--text-muted); font-size: 0.85rem;">من: نظام الاستشارات القانونية</span>
+                                <button class="btn-blue" style="padding: 0.4rem 1rem; font-size: 0.85rem; opacity: 0.7;">تمت المراجعة</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Notification Item 4 - System -->
+                    <div class="notification-item system unread" style="background: var(--bg-white); border: 1px solid var(--accent-aqua); border-left: 4px solid var(--accent-aqua); padding: 1.5rem; margin-bottom: 1rem; border-radius: var(--border-radius); box-shadow: var(--shadow-light);">
+                        <div class="notification-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                            <div class="notification-meta" style="display: flex; align-items: center; gap: 1rem; flex: 1;">
+                                <span class="notification-type system" style="background: var(--accent-aqua); color: white; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.8rem; font-weight: 600;">نظام</span>
+                                <span class="notification-time" style="color: var(--text-muted); font-size: 0.9rem;">أمس</span>
+                                <span class="notification-status unread" style="background: var(--brand-medium-blue); color: white; padding: 0.2rem 0.6rem; border-radius: 15px; font-size: 0.75rem;">غير مقروء</span>
+                            </div>
+                            <div class="notification-actions" style="display: flex; gap: 0.5rem;">
+                                <button class="btn-blue" style="padding: 0.25rem 0.5rem; font-size: 0.8rem;">علامة مقروء</button>
+                            </div>
+                        </div>
+                        <div class="notification-content">
+                            <h4 style="color: var(--brand-deep-navy); margin-bottom: 0.5rem;">تحديث النظام - إضافة ميزات جديدة</h4>
+                            <p style="color: var(--text-primary); line-height: 1.5; margin-bottom: 0.75rem;">تم تطبيق التحديث الجديد لنظام سند القانوني v2.1.0. الميزات الجديدة تشمل: تحسينات في واجهة المستخدم، إضافة نظام التبليغات المتطور، وتحسين أداء البحث في الأرشيف. لمراجعة كافة التحديثات، يرجى زيارة دليل المستخدم.</p>
+                            <div class="notification-footer" style="display: flex; justify-content: space-between; align-items: center; padding-top: 0.75rem; border-top: 1px solid var(--border-light);">
+                                <span style="color: var(--text-muted); font-size: 0.85rem;">من: إدارة النظام</span>
+                                <button class="btn-green" style="padding: 0.4rem 1rem; font-size: 0.85rem;">عرض التحديثات</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Notification Item 5 - Reminder -->
+                    <div class="notification-item reminder unread" style="background: var(--bg-white); border: 1px solid var(--support-lime); border-left: 4px solid var(--support-lime); padding: 1.5rem; margin-bottom: 1rem; border-radius: var(--border-radius); box-shadow: var(--shadow-light);">
+                        <div class="notification-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                            <div class="notification-meta" style="display: flex; align-items: center; gap: 1rem; flex: 1;">
+                                <span class="notification-type reminder" style="background: var(--support-lime); color: white; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.8rem; font-weight: 600;">تذكير</span>
+                                <span class="notification-time" style="color: var(--text-muted); font-size: 0.9rem;">منذ يومين</span>
+                                <span class="notification-status unread" style="background: var(--brand-medium-blue); color: white; padding: 0.2rem 0.6rem; border-radius: 15px; font-size: 0.75rem;">غير مقروء</span>
+                            </div>
+                            <div class="notification-actions" style="display: flex; gap: 0.5rem;">
+                                <button class="btn-blue" style="padding: 0.25rem 0.5rem; font-size: 0.8rem;">تأجيل</button>
+                                <button class="btn-green" style="padding: 0.25rem 0.5rem; font-size: 0.8rem;">تم</button>
+                            </div>
+                        </div>
+                        <div class="notification-content">
+                            <h4 style="color: var(--brand-deep-navy); margin-bottom: 0.5rem;">تذكير: مراجعة عقود الشراكة الشهرية</h4>
+                            <p style="color: var(--text-primary); line-height: 1.5; margin-bottom: 0.75rem;">حان موعد المراجعة الشهرية لعقود الشراكة والاتفاقيات التجارية. يجب مراجعة 12 عقد شراكة و 8 اتفاقيات تجارية وتحديث البنود حسب التعديلات القانونية الجديدة. الموعد النهائي: 5 أكتوبر 2024.</p>
+                            <div class="notification-footer" style="display: flex; justify-content: space-between; align-items: center; padding-top: 0.75rem; border-top: 1px solid var(--border-light);">
+                                <span style="color: var(--text-muted); font-size: 0.85rem;">من: نظام المهام الدورية</span>
+                                <button class="btn-blue" style="padding: 0.4rem 1rem; font-size: 0.85rem;">بدء المراجعة</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Pagination -->
+                    <div class="pagination" style="margin-top: 2rem; display: flex; justify-content: center; align-items: center; gap: 0.5rem;">
+                        <button class="btn-blue" style="padding: 0.5rem 1rem;">السابق</button>
+                        <span style="padding: 0.5rem 1rem; background: var(--brand-medium-blue); color: white; border-radius: var(--border-radius); font-weight: 600;">1</span>
+                        <button class="btn-blue" style="padding: 0.5rem 1rem; background: var(--bg-light); color: var(--text-primary);">2</button>
+                        <button class="btn-blue" style="padding: 0.5rem 1rem; background: var(--bg-light); color: var(--text-primary);">3</button>
+                        <button class="btn-blue" style="padding: 0.5rem 1rem;">التالي</button>
+                    </div>
+                </div>
             </div>
         </section>
 
         <section id="legal-consultations" class="content-section">
             <div class="page-header">
                 <h2><i class="fas fa-comments"></i> الاستشارات القانونية</h2>
+                <div class="header-navigation">
+                    <div class="nav-item active">الاستشارات المفتوحة</div>
+                    <div class="nav-item">الاستشارات المكتملة</div>
+                    <div class="nav-item">إحصائيات الاستشارات</div>
+                </div>
             </div>
-            <div class="placeholder-content">
-                <p>قسم الاستشارات القانونية قيد التطوير</p>
+            
+            <div class="consultation-container" style="padding: 2rem;">
+                <!-- Statistics Cards -->
+                <div class="dashboard-stats" style="margin-bottom: 2rem;">
+                    <div class="stat-card">
+                        <div class="stat-icon blue">
+                            <i class="fas fa-comment-dots"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h4>الاستشارات المفتوحة</h4>
+                            <span class="stat-number">23</span>
+                            <div class="stat-detail">في انتظار الرد</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon green">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h4>استشارات مكتملة هذا الشهر</h4>
+                            <span class="stat-number">127</span>
+                            <div class="stat-trend positive"><i class="fas fa-arrow-up"></i> +15%</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon orange">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h4>متوسط وقت الاستجابة</h4>
+                            <span class="stat-number">4.2</span>
+                            <div class="stat-detail">ساعات</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon purple">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h4>تقييم الخدمة</h4>
+                            <span class="stat-number">4.8</span>
+                            <div class="stat-detail">من 5 نجوم</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- New Consultation Button -->
+                <div style="margin-bottom: 2rem;">
+                    <button class="btn-blue" style="padding: 1rem 2rem; font-size: 1rem;">
+                        <i class="fas fa-plus"></i> طلب استشارة قانونية جديدة
+                    </button>
+                </div>
+
+                <!-- Consultations Table -->
+                <div class="cases-table-container">
+                    <table class="enhanced-cases-table">
+                        <thead>
+                            <tr>
+                                <th>رقم الاستشارة</th>
+                                <th>نوع الاستشارة</th>
+                                <th>الموضوع</th>
+                                <th>تاريخ الطلب</th>
+                                <th>المستشار المختص</th>
+                                <th>الحالة</th>
+                                <th>الأولوية</th>
+                                <th>الإجراءات</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>CS-2024-001</td>
+                                <td>استشارة عقود</td>
+                                <td>مراجعة عقد توريد</td>
+                                <td>2024-09-28</td>
+                                <td>د. أحمد العلي</td>
+                                <td><span style="color: #48AD48; font-weight: 600;">مكتملة</span></td>
+                                <td><span style="color: #2FA9E0;">عادية</span></td>
+                                <td>
+                                    <button class="btn-blue" style="padding: 0.25rem 0.5rem; font-size: 0.8rem;">عرض</button>
+                                    <button class="btn-green" style="padding: 0.25rem 0.5rem; font-size: 0.8rem;">تحميل</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>CS-2024-002</td>
+                                <td>استشارة عمالية</td>
+                                <td>فصل تعسفي للموظف</td>
+                                <td>2024-09-29</td>
+                                <td>أ. فاطمة الزهراني</td>
+                                <td><span style="color: #9ECC3B; font-weight: 600;">قيد المراجعة</span></td>
+                                <td><span style="color: #EF4444;">عاجل</span></td>
+                                <td>
+                                    <button class="btn-blue" style="padding: 0.25rem 0.5rem; font-size: 0.8rem;">متابعة</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>CS-2024-003</td>
+                                <td>استشارة تجارية</td>
+                                <td>تأسيس شركة ذات مسؤولية محدودة</td>
+                                <td>2024-09-30</td>
+                                <td>د. محمد الشهري</td>
+                                <td><span style="color: #2FA9E0; font-weight: 600;">جديد</span></td>
+                                <td><span style="color: #2FA9E0;">عادية</span></td>
+                                <td>
+                                    <button class="btn-blue" style="padding: 0.25rem 0.5rem; font-size: 0.8rem;">بدء المراجعة</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>CS-2024-004</td>
+                                <td>استشارة عقارية</td>
+                                <td>نزاع حدود الأراضي</td>
+                                <td>2024-09-27</td>
+                                <td>أ. سارة القحطاني</td>
+                                <td><span style="color: #48AD48; font-weight: 600;">مكتملة</span></td>
+                                <td><span style="color: #9ECC3B;">متوسط</span></td>
+                                <td>
+                                    <button class="btn-blue" style="padding: 0.25rem 0.5rem; font-size: 0.8rem;">عرض</button>
+                                    <button class="btn-green" style="padding: 0.25rem 0.5rem; font-size: 0.8rem;">تحميل</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>CS-2024-005</td>
+                                <td>استشارة جنائية</td>
+                                <td>قضية اختلاس مالي</td>
+                                <td>2024-09-30</td>
+                                <td>د. خالد المطيري</td>
+                                <td><span style="color: #9ECC3B; font-weight: 600;">قيد المراجعة</span></td>
+                                <td><span style="color: #EF4444;">عاجل جداً</span></td>
+                                <td>
+                                    <button class="btn-red" style="padding: 0.25rem 0.5rem; font-size: 0.8rem;">متابعة عاجل</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </section>
 
         <section id="reports" class="content-section">
             <div class="page-header">
                 <h2><i class="fas fa-chart-bar"></i> المؤشرات والتقارير</h2>
+                <div class="header-navigation">
+                    <div class="nav-item active">التقارير التنفيذية</div>
+                    <div class="nav-item">تقارير الأداء</div>
+                    <div class="nav-item">التحليلات المتقدمة</div>
+                </div>
             </div>
-            <div class="placeholder-content">
-                <p>قسم التقارير قيد التطوير</p>
+            
+            <div class="reports-container" style="padding: 2rem;">
+                <!-- Report Generation Section -->
+                <div class="form-section" style="margin-bottom: 2rem;">
+                    <h3 style="color: var(--brand-deep-navy); margin-bottom: 1rem;">
+                        <i class="fas fa-file-alt"></i> إنشاء تقرير جديد
+                    </h3>
+                    <div class="form-row">
+                        <div class="form-field">
+                            <label>نوع التقرير</label>
+                            <select class="form-input">
+                                <option>تقرير شهري شامل</option>
+                                <option>تقرير أداء القضايا</option>
+                                <option>تقرير الاستشارات القانونية</option>
+                                <option>تقرير مالي</option>
+                                <option>تقرير الموارد البشرية</option>
+                            </select>
+                        </div>
+                        <div class="form-field">
+                            <label>الفترة الزمنية</label>
+                            <select class="form-input">
+                                <option>الشهر الحالي</option>
+                                <option>الشهر الماضي</option>
+                                <option>آخر 3 أشهر</option>
+                                <option>آخر 6 أشهر</option>
+                                <option>السنة الحالية</option>
+                                <option>فترة مخصصة</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-actions" style="margin-top: 1rem;">
+                        <button class="btn-blue"><i class="fas fa-chart-line"></i> إنشاء التقرير</button>
+                        <button class="btn-green"><i class="fas fa-download"></i> تصدير PDF</button>
+                        <button class="btn-blue"><i class="fas fa-file-excel"></i> تصدير Excel</button>
+                    </div>
+                </div>
+
+                <!-- Key Performance Indicators -->
+                <div class="kpi-section">
+                    <h3 class="section-title"><i class="fas fa-tachometer-alt"></i> مؤشرات الأداء الرئيسية</h3>
+                    <div class="dashboard-stats">
+                        <div class="stat-card">
+                            <div class="stat-icon blue">
+                                <i class="fas fa-percentage"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h4>معدل إنجاز القضايا</h4>
+                                <span class="stat-number">87%</span>
+                                <div class="stat-trend positive"><i class="fas fa-arrow-up"></i> +5% هذا الشهر</div>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon green">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h4>متوسط وقت الإنجاز</h4>
+                                <span class="stat-number">45</span>
+                                <div class="stat-detail">يوم عمل</div>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon orange">
+                                <i class="fas fa-dollar-sign"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h4>الإيرادات المحققة</h4>
+                                <span class="stat-number">2.4M</span>
+                                <div class="stat-detail">ريال سعودي</div>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon purple">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h4>رضا العملاء</h4>
+                                <span class="stat-number">94%</span>
+                                <div class="stat-trend positive"><i class="fas fa-arrow-up"></i> +2%</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Reports -->
+                <div style="margin-top: 2rem;">
+                    <h3 style="color: var(--brand-deep-navy); margin-bottom: 1rem;">
+                        <i class="fas fa-history"></i> التقارير الحديثة
+                    </h3>
+                    <div class="cases-table-container">
+                        <table class="enhanced-cases-table">
+                            <thead>
+                                <tr>
+                                    <th>اسم التقرير</th>
+                                    <th>النوع</th>
+                                    <th>تاريخ الإنشاء</th>
+                                    <th>الفترة المشمولة</th>
+                                    <th>حالة التقرير</th>
+                                    <th>الإجراءات</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>التقرير الشهري - سبتمبر 2024</td>
+                                    <td>تقرير شامل</td>
+                                    <td>2024-09-30</td>
+                                    <td>سبتمبر 2024</td>
+                                    <td><span style="color: #48AD48; font-weight: 600;">مكتمل</span></td>
+                                    <td>
+                                        <button class="btn-blue" style="padding: 0.25rem 0.5rem; font-size: 0.8rem;">عرض</button>
+                                        <button class="btn-green" style="padding: 0.25rem 0.5rem; font-size: 0.8rem;">تحميل PDF</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>تقرير أداء القضايا الجنائية</td>
+                                    <td>تقرير متخصص</td>
+                                    <td>2024-09-28</td>
+                                    <td>أغسطس 2024</td>
+                                    <td><span style="color: #48AD48; font-weight: 600;">مكتمل</span></td>
+                                    <td>
+                                        <button class="btn-blue" style="padding: 0.25rem 0.5rem; font-size: 0.8rem;">عرض</button>
+                                        <button class="btn-green" style="padding: 0.25rem 0.5rem; font-size: 0.8rem;">تحميل PDF</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>تحليل الاستشارات القانونية</td>
+                                    <td>تقرير تحليلي</td>
+                                    <td>2024-09-25</td>
+                                    <td>الربع الثالث 2024</td>
+                                    <td><span style="color: #9ECC3B; font-weight: 600;">قيد المعالجة</span></td>
+                                    <td>
+                                        <button class="btn-blue" style="padding: 0.25rem 0.5rem; font-size: 0.8rem;">متابعة</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>التقرير المالي السنوي</td>
+                                    <td>تقرير مالي</td>
+                                    <td>2024-09-20</td>
+                                    <td>يناير - سبتمبر 2024</td>
+                                    <td><span style="color: #48AD48; font-weight: 600;">مكتمل</span></td>
+                                    <td>
+                                        <button class="btn-blue" style="padding: 0.25rem 0.5rem; font-size: 0.8rem;">عرض</button>
+                                        <button class="btn-green" style="padding: 0.25rem 0.5rem; font-size: 0.8rem;">تحميل Excel</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </section>
 
         <section id="case-archive" class="content-section">
             <div class="page-header">
                 <h2><i class="fas fa-archive"></i> أرشيف القضايا</h2>
+                <div class="header-navigation">
+                    <div class="nav-item active">جميع القضايا المؤرشفة</div>
+                    <div class="nav-item">بحث متقدم</div>
+                    <div class="nav-item">إحصائيات الأرشيف</div>
+                </div>
             </div>
-            <div class="placeholder-content">
-                <p>أرشيف القضايا قيد التطوير</p>
+            
+            <div class="archive-container" style="padding: 2rem;">
+                <!-- Archive Statistics -->
+                <div class="dashboard-stats" style="margin-bottom: 2rem;">
+                    <div class="stat-card">
+                        <div class="stat-icon blue">
+                            <i class="fas fa-archive"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h4>إجمالي القضايا المؤرشفة</h4>
+                            <span class="stat-number">1,247</span>
+                            <div class="stat-detail">منذ بداية النظام</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon green">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h4>قضايا مؤرشفة هذا الشهر</h4>
+                            <span class="stat-number">34</span>
+                            <div class="stat-trend positive"><i class="fas fa-arrow-up"></i> +8%</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon orange">
+                            <i class="fas fa-folder"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h4>حجم البيانات المؤرشفة</h4>
+                            <span class="stat-number">15.6</span>
+                            <div class="stat-detail">جيجابايت</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon purple">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h4>متوسط فترة الأرشفة</h4>
+                            <span class="stat-number">6</span>
+                            <div class="stat-detail">أشهر بعد الإغلاق</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Advanced Search -->
+                <div class="form-section" style="margin-bottom: 2rem;">
+                    <h3 style="color: var(--brand-deep-navy); margin-bottom: 1rem;">
+                        <i class="fas fa-search"></i> البحث المتقدم في الأرشيف
+                    </h3>
+                    <div class="form-row">
+                        <div class="form-field">
+                            <label>رقم القضية</label>
+                            <input type="text" class="form-input" placeholder="أدخل رقم القضية">
+                        </div>
+                        <div class="form-field">
+                            <label>نوع القضية</label>
+                            <select class="form-input">
+                                <option>جميع الأنواع</option>
+                                <option>قضايا جنائية</option>
+                                <option>قضايا مدنية</option>
+                                <option>قضايا تجارية</option>
+                                <option>قضايا عمالية</option>
+                                <option>قضايا عقارية</option>
+                            </select>
+                        </div>
+                        <div class="form-field">
+                            <label>تاريخ الأرشفة من</label>
+                            <input type="date" class="form-input">
+                        </div>
+                        <div class="form-field">
+                            <label>إلى</label>
+                            <input type="date" class="form-input">
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <button class="btn-blue"><i class="fas fa-search"></i> بحث</button>
+                        <button class="btn-green"><i class="fas fa-redo"></i> إعادة تعيين</button>
+                    </div>
+                </div>
+
+                <!-- Archived Cases Table -->
+                <div class="cases-table-container">
+                    <table class="enhanced-cases-table">
+                        <thead>
+                            <tr>
+                                <th>رقم القضية</th>
+                                <th>نوع القضية</th>
+                                <th>موضوع القضية</th>
+                                <th>تاريخ الإغلاق</th>
+                                <th>تاريخ الأرشفة</th>
+                                <th>النتيجة النهائية</th>
+                                <th>المحامي المسؤول</th>
+                                <th>الإجراءات</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>CASE-2023-1156</td>
+                                <td>قضية جنائية</td>
+                                <td>قضية احتيال مالي</td>
+                                <td>2024-03-15</td>
+                                <td>2024-09-15</td>
+                                <td><span style="color: #48AD48; font-weight: 600;">حكم بالإدانة</span></td>
+                                <td>أ. محمد العتيبي</td>
+                                <td>
+                                    <button class="btn-blue" style="padding: 0.25rem 0.5rem; font-size: 0.8rem;">عرض</button>
+                                    <button class="btn-green" style="padding: 0.25rem 0.5rem; font-size: 0.8rem;">تحميل</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>CASE-2023-1098</td>
+                                <td>قضية مدنية</td>
+                                <td>نزاع عقاري بين الأطراف</td>
+                                <td>2024-02-28</td>
+                                <td>2024-08-28</td>
+                                <td><span style="color: #48AD48; font-weight: 600;">صلح ودي</span></td>
+                                <td>د. فاطمة الأحمد</td>
+                                <td>
+                                    <button class="btn-blue" style="padding: 0.25rem 0.5rem; font-size: 0.8rem;">عرض</button>
+                                    <button class="btn-green" style="padding: 0.25rem 0.5rem; font-size: 0.8rem;">تحميل</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>CASE-2023-1034</td>
+                                <td>قضية تجارية</td>
+                                <td>نزاع شراكة تجارية</td>
+                                <td>2024-01-20</td>
+                                <td>2024-07-20</td>
+                                <td><span style="color: #EF4444; font-weight: 600;">حكم لصالح الخصم</span></td>
+                                <td>د. سالم الدوسري</td>
+                                <td>
+                                    <button class="btn-blue" style="padding: 0.25rem 0.5rem; font-size: 0.8rem;">عرض</button>
+                                    <button class="btn-green" style="padding: 0.25rem 0.5rem; font-size: 0.8rem;">تحميل</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>CASE-2023-0987</td>
+                                <td>قضية عمالية</td>
+                                <td>فصل تعسفي من العمل</td>
+                                <td>2023-12-10</td>
+                                <td>2024-06-10</td>
+                                <td><span style="color: #48AD48; font-weight: 600;">حكم لصالح العامل</span></td>
+                                <td>أ. نورا السليمان</td>
+                                <td>
+                                    <button class="btn-blue" style="padding: 0.25rem 0.5rem; font-size: 0.8rem;">عرض</button>
+                                    <button class="btn-green" style="padding: 0.25rem 0.5rem; font-size: 0.8rem;">تحميل</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>CASE-2023-0923</td>
+                                <td>قضية عقارية</td>
+                                <td>نزاع حدود الأراضي</td>
+                                <td>2023-11-25</td>
+                                <td>2024-05-25</td>
+                                <td><span style="color: #9ECC3B; font-weight: 600;">قرار بالتقسيم</span></td>
+                                <td>د. عبدالله المالكي</td>
+                                <td>
+                                    <button class="btn-blue" style="padding: 0.25rem 0.5rem; font-size: 0.8rem;">عرض</button>
+                                    <button class="btn-green" style="padding: 0.25rem 0.5rem; font-size: 0.8rem;">تحميل</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </section>
 
         <section id="pending-settings" class="content-section">
             <div class="page-header">
                 <h2><i class="fas fa-clock"></i> الإعدادات القائمة</h2>
+                <div class="header-navigation">
+                    <div class="nav-item active">الإعدادات المعلقة</div>
+                    <div class="nav-item">إعدادات النظام</div>
+                    <div class="nav-item">صلاحيات المستخدمين</div>
+                </div>
             </div>
-            <div class="placeholder-content">
-                <p>الإعدادات قيد التطوير</p>
+            
+            <div class="settings-container" style="padding: 2rem;">
+                <!-- Pending Settings Statistics -->
+                <div class="dashboard-stats" style="margin-bottom: 2rem;">
+                    <div class="stat-card">
+                        <div class="stat-icon orange">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h4>الإعدادات المعلقة</h4>
+                            <span class="stat-number">7</span>
+                            <div class="stat-detail">تحتاج موافقة</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon blue">
+                            <i class="fas fa-cog"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h4>إعدادات مفعلة</h4>
+                            <span class="stat-number">23</span>
+                            <div class="stat-detail">إعداد نشط</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon green">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h4>معتمدة هذا الأسبوع</h4>
+                            <span class="stat-number">12</span>
+                            <div class="stat-trend positive"><i class="fas fa-arrow-up"></i> +4</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon red">
+                            <i class="fas fa-times-circle"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h4>مرفوضة</h4>
+                            <span class="stat-number">3</span>
+                            <div class="stat-detail">هذا الشهر</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pending Settings List -->
+                <div style="margin-bottom: 2rem;">
+                    <h3 style="color: var(--brand-deep-navy); margin-bottom: 1rem;">
+                        <i class="fas fa-hourglass-half"></i> الإعدادات في انتظار الموافقة
+                    </h3>
+                    <div class="cases-table-container">
+                        <table class="enhanced-cases-table">
+                            <thead>
+                                <tr>
+                                    <th>نوع الإعداد</th>
+                                    <th>الوصف</th>
+                                    <th>مقدم الطلب</th>
+                                    <th>تاريخ الطلب</th>
+                                    <th>المستوى</th>
+                                    <th>الحالة</th>
+                                    <th>الإجراءات</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>صلاحيات المستخدم</td>
+                                    <td>إضافة صلاحية إدارة التقارير للمحامي أحمد العلي</td>
+                                    <td>مدير النظام</td>
+                                    <td>2024-09-29</td>
+                                    <td><span style="color: #EF4444;">عالي</span></td>
+                                    <td><span style="color: #9ECC3B; font-weight: 600;">قيد المراجعة</span></td>
+                                    <td>
+                                        <button class="btn-green" style="padding: 0.25rem 0.5rem; font-size: 0.8rem;">موافقة</button>
+                                        <button class="btn-red" style="padding: 0.25rem 0.5rem; font-size: 0.8rem;">رفض</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>إعدادات الأمان</td>
+                                    <td>تمديد مدة انتهاء كلمة المرور إلى 180 يوم</td>
+                                    <td>مسؤول الأمان</td>
+                                    <td>2024-09-28</td>
+                                    <td><span style="color: #EF4444;">عالي</span></td>
+                                    <td><span style="color: #9ECC3B; font-weight: 600;">قيد المراجعة</span></td>
+                                    <td>
+                                        <button class="btn-green" style="padding: 0.25rem 0.5rem; font-size: 0.8rem;">موافقة</button>
+                                        <button class="btn-red" style="padding: 0.25rem 0.5rem; font-size: 0.8rem;">رفض</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>إعدادات النظام</td>
+                                    <td>تخصيص قالب جديد للتقارير الشهرية</td>
+                                    <td>فريق التطوير</td>
+                                    <td>2024-09-27</td>
+                                    <td><span style="color: #2FA9E0;">متوسط</span></td>
+                                    <td><span style="color: #9ECC3B; font-weight: 600;">قيد المراجعة</span></td>
+                                    <td>
+                                        <button class="btn-green" style="padding: 0.25rem 0.5rem; font-size: 0.8rem;">موافقة</button>
+                                        <button class="btn-red" style="padding: 0.25rem 0.5rem; font-size: 0.8rem;">رفض</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>تكامل خارجي</td>
+                                    <td>ربط النظام مع منصة المحاكم الإلكترونية</td>
+                                    <td>المدير التنفيذي</td>
+                                    <td>2024-09-25</td>
+                                    <td><span style="color: #EF4444;">عالي</span></td>
+                                    <td><span style="color: #2FA9E0; font-weight: 600;">جديد</span></td>
+                                    <td>
+                                        <button class="btn-blue" style="padding: 0.25rem 0.5rem; font-size: 0.8rem;">مراجعة</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>إعدادات الإشعارات</td>
+                                    <td>تفعيل الإشعارات الفورية للقضايا العاجلة</td>
+                                    <td>مدير العمليات</td>
+                                    <td>2024-09-24</td>
+                                    <td><span style="color: #9ECC3B;">منخفض</span></td>
+                                    <td><span style="color: #9ECC3B; font-weight: 600;">قيد المراجعة</span></td>
+                                    <td>
+                                        <button class="btn-green" style="padding: 0.25rem 0.5rem; font-size: 0.8rem;">موافقة</button>
+                                        <button class="btn-red" style="padding: 0.25rem 0.5rem; font-size: 0.8rem;">رفض</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- System Configuration Panel -->
+                <div class="form-section">
+                    <h3 style="color: var(--brand-deep-navy); margin-bottom: 1rem;">
+                        <i class="fas fa-wrench"></i> إعدادات النظام العامة
+                    </h3>
+                    <div class="form-row">
+                        <div class="form-field">
+                            <label>مهلة الجلسة (دقيقة)</label>
+                            <input type="number" class="form-input" value="30" min="15" max="120">
+                        </div>
+                        <div class="form-field">
+                            <label>حد الملفات المرفقة (MB)</label>
+                            <input type="number" class="form-input" value="50" min="1" max="200">
+                        </div>
+                        <div class="form-field">
+                            <label>لغة النظام الافتراضية</label>
+                            <select class="form-input">
+                                <option selected>العربية</option>
+                                <option>English</option>
+                            </select>
+                        </div>
+                        <div class="form-field">
+                            <label>المنطقة الزمنية</label>
+                            <select class="form-input">
+                                <option selected>آسيا/الرياض</option>
+                                <option>آسيا/دبي</option>
+                                <option>أفريقيا/القاهرة</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <button class="btn-blue"><i class="fas fa-save"></i> حفظ الإعدادات</button>
+                        <button class="btn-green"><i class="fas fa-undo"></i> استعادة الافتراضي</button>
+                    </div>
+                </div>
             </div>
         </section>
 
         <section id="case-management" class="content-section">
             <div class="page-header">
                 <h2><i class="fas fa-cogs"></i> إدارة القضايا (المقر الرئيسي)</h2>
+                <div class="header-navigation">
+                    <div class="nav-item active">لوحة التحكم</div>
+                    <div class="nav-item">توزيع القضايا</div>
+                    <div class="nav-item">مراقبة الأداء</div>
+                </div>
             </div>
-            <div class="placeholder-content">
-                <p>إدارة القضايا قيد التطوير</p>
+            
+            <div class="management-container" style="padding: 2rem;">
+                <!-- Management Dashboard -->
+                <div class="dashboard-stats" style="margin-bottom: 2rem;">
+                    <div class="stat-card">
+                        <div class="stat-icon navy">
+                            <i class="fas fa-building"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h4>إجمالي الفروع</h4>
+                            <span class="stat-number">8</span>
+                            <div class="stat-detail">فروع نشطة</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon blue">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h4>المحامون النشطون</h4>
+                            <span class="stat-number">45</span>
+                            <div class="stat-detail">في جميع الفروع</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon green">
+                            <i class="fas fa-tasks"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h4>القضايا الجارية</h4>
+                            <span class="stat-number">234</span>
+                            <div class="stat-trend positive"><i class="fas fa-arrow-up"></i> +12 اليوم</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon purple">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h4>معدل الإنجاز</h4>
+                            <span class="stat-number">92%</span>
+                            <div class="stat-trend positive"><i class="fas fa-arrow-up"></i> +3%</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Branch Performance -->
+                <div style="margin-bottom: 2rem;">
+                    <h3 style="color: var(--brand-deep-navy); margin-bottom: 1rem;">
+                        <i class="fas fa-chart-bar"></i> أداء الفروع
+                    </h3>
+                    <div class="cases-table-container">
+                        <table class="enhanced-cases-table">
+                            <thead>
+                                <tr>
+                                    <th>الفرع</th>
+                                    <th>المحامون</th>
+                                    <th>القضايا النشطة</th>
+                                    <th>القضايا المكتملة</th>
+                                    <th>معدل الإنجاز</th>
+                                    <th>التقييم</th>
+                                    <th>الإجراءات</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>فرع الرياض الرئيسي</td>
+                                    <td>12</td>
+                                    <td>67</td>
+                                    <td>145</td>
+                                    <td><span style="color: #48AD48; font-weight: 600;">94%</span></td>
+                                    <td><span style="color: #48AD48;">ممتاز</span></td>
+                                    <td>
+                                        <button class="btn-blue" style="padding: 0.25rem 0.5rem; font-size: 0.8rem;">تفاصيل</button>
+                                        <button class="btn-green" style="padding: 0.25rem 0.5rem; font-size: 0.8rem;">تقرير</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>فرع جدة</td>
+                                    <td>8</td>
+                                    <td>42</td>
+                                    <td>98</td>
+                                    <td><span style="color: #48AD48; font-weight: 600;">89%</span></td>
+                                    <td><span style="color: #48AD48;">جيد جداً</span></td>
+                                    <td>
+                                        <button class="btn-blue" style="padding: 0.25rem 0.5rem; font-size: 0.8rem;">تفاصيل</button>
+                                        <button class="btn-green" style="padding: 0.25rem 0.5rem; font-size: 0.8rem;">تقرير</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>فرع الدمام</td>
+                                    <td>6</td>
+                                    <td>38</td>
+                                    <td>76</td>
+                                    <td><span style="color: #9ECC3B; font-weight: 600;">82%</span></td>
+                                    <td><span style="color: #9ECC3B;">جيد</span></td>
+                                    <td>
+                                        <button class="btn-blue" style="padding: 0.25rem 0.5rem; font-size: 0.8rem;">تفاصيل</button>
+                                        <button class="btn-green" style="padding: 0.25rem 0.5rem; font-size: 0.8rem;">تقرير</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>فرع المدينة المنورة</td>
+                                    <td>5</td>
+                                    <td>29</td>
+                                    <td>64</td>
+                                    <td><span style="color: #9ECC3B; font-weight: 600;">85%</span></td>
+                                    <td><span style="color: #9ECC3B;">جيد</span></td>
+                                    <td>
+                                        <button class="btn-blue" style="padding: 0.25rem 0.5rem; font-size: 0.8rem;">تفاصيل</button>
+                                        <button class="btn-green" style="padding: 0.25rem 0.5rem; font-size: 0.8rem;">تقرير</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>فرع الطائف</td>
+                                    <td>4</td>
+                                    <td>24</td>
+                                    <td>52</td>
+                                    <td><span style="color: #EF4444; font-weight: 600;">76%</span></td>
+                                    <td><span style="color: #EF4444;">يحتاج تحسين</span></td>
+                                    <td>
+                                        <button class="btn-blue" style="padding: 0.25rem 0.5rem; font-size: 0.8rem;">تفاصيل</button>
+                                        <button class="btn-red" style="padding: 0.25rem 0.5rem; font-size: 0.8rem;">خطة تحسين</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Case Assignment -->
+                <div class="form-section">
+                    <h3 style="color: var(--brand-deep-navy); margin-bottom: 1rem;">
+                        <i class="fas fa-random"></i> توزيع القضايا الجديدة
+                    </h3>
+                    <div class="form-row">
+                        <div class="form-field">
+                            <label>رقم القضية</label>
+                            <input type="text" class="form-input" placeholder="CASE-2024-XXXX">
+                        </div>
+                        <div class="form-field">
+                            <label>نوع القضية</label>
+                            <select class="form-input">
+                                <option>قضية جنائية</option>
+                                <option>قضية مدنية</option>
+                                <option>قضية تجارية</option>
+                                <option>قضية عمالية</option>
+                                <option>قضية عقارية</option>
+                            </select>
+                        </div>
+                        <div class="form-field">
+                            <label>الفرع المختص</label>
+                            <select class="form-input">
+                                <option>الرياض الرئيسي</option>
+                                <option>جدة</option>
+                                <option>الدمام</option>
+                                <option>المدينة المنورة</option>
+                                <option>الطائف</option>
+                            </select>
+                        </div>
+                        <div class="form-field">
+                            <label>المحامي المكلف</label>
+                            <select class="form-input">
+                                <option>توزيع تلقائي</option>
+                                <option>د. أحمد العلي</option>
+                                <option>أ. فاطمة الزهراني</option>
+                                <option>د. محمد الشهري</option>
+                                <option>أ. سارة القحطاني</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <button class="btn-blue"><i class="fas fa-share-square"></i> توزيع القضية</button>
+                        <button class="btn-green"><i class="fas fa-magic"></i> توزيع تلقائي ذكي</button>
+                    </div>
+                </div>
             </div>
         </section>
 
         <section id="legal-library" class="content-section">
             <div class="page-header">
                 <h2><i class="fas fa-book"></i> المكتبة القانونية</h2>
+                <div class="header-navigation">
+                    <div class="nav-item active">الكتب والمراجع</div>
+                    <div class="nav-item">الأحكام والسوابق</div>
+                    <div class="nav-item">النماذج القانونية</div>
+                </div>
             </div>
-            <div class="placeholder-content">
-                <p>المكتبة القانونية قيد التطوير</p>
+            
+            <div class="library-container" style="padding: 2rem;">
+                <!-- Library Statistics -->
+                <div class="dashboard-stats" style="margin-bottom: 2rem;">
+                    <div class="stat-card">
+                        <div class="stat-icon blue">
+                            <i class="fas fa-books"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h4>إجمالي المراجع</h4>
+                            <span class="stat-number">1,847</span>
+                            <div class="stat-detail">كتاب ومرجع قانوني</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon green">
+                            <i class="fas fa-gavel"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h4>السوابق القضائية</h4>
+                            <span class="stat-number">542</span>
+                            <div class="stat-detail">حكم وقرار</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon orange">
+                            <i class="fas fa-file-alt"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h4>النماذج القانونية</h4>
+                            <span class="stat-number">128</span>
+                            <div class="stat-detail">نموذج جاهز</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon purple">
+                            <i class="fas fa-download"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h4>التحميلات هذا الشهر</h4>
+                            <span class="stat-number">392</span>
+                            <div class="stat-trend positive"><i class="fas fa-arrow-up"></i> +18%</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Search Library -->
+                <div class="form-section" style="margin-bottom: 2rem;">
+                    <h3 style="color: var(--brand-deep-navy); margin-bottom: 1rem;">
+                        <i class="fas fa-search"></i> البحث في المكتبة القانونية
+                    </h3>
+                    <div class="form-row">
+                        <div class="form-field">
+                            <label>نوع المحتوى</label>
+                            <select class="form-input">
+                                <option>جميع الأنواع</option>
+                                <option>الكتب والمراجع</option>
+                                <option>الأحكام القضائية</option>
+                                <option>النماذج القانونية</option>
+                                <option>التشريعات والقوانين</option>
+                                <option>الاتفاقيات الدولية</option>
+                            </select>
+                        </div>
+                        <div class="form-field">
+                            <label>المجال القانوني</label>
+                            <select class="form-input">
+                                <option>جميع المجالات</option>
+                                <option>القانون الجنائي</option>
+                                <option>القانون المدني</option>
+                                <option>القانون التجاري</option>
+                                <option>قانون العمل</option>
+                                <option>القانون العقاري</option>
+                            </select>
+                        </div>
+                        <div class="form-field">
+                            <label>كلمات البحث</label>
+                            <input type="text" class="form-input" placeholder="أدخل كلمات البحث">
+                        </div>
+                        <div class="form-field">
+                            <label>اللغة</label>
+                            <select class="form-input">
+                                <option>العربية</option>
+                                <option>الإنجليزية</option>
+                                <option>الفرنسية</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <button class="btn-blue"><i class="fas fa-search"></i> بحث</button>
+                        <button class="btn-green"><i class="fas fa-filter"></i> بحث متقدم</button>
+                    </div>
+                </div>
+
+                <!-- Library Content -->
+                <div class="cases-table-container">
+                    <h3 style="color: var(--brand-deep-navy); margin-bottom: 1rem;">
+                        <i class="fas fa-list"></i> المحتوى الأكثر استخداماً
+                    </h3>
+                    <table class="enhanced-cases-table">
+                        <thead>
+                            <tr>
+                                <th>العنوان</th>
+                                <th>النوع</th>
+                                <th>المؤلف/المصدر</th>
+                                <th>التاريخ</th>
+                                <th>المجال</th>
+                                <th>التحميلات</th>
+                                <th>الإجراءات</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>شرح نظام المرافعات الشرعية السعودي</td>
+                                <td><span style="color: #2FA9E0;">كتاب قانوني</span></td>
+                                <td>د. عبدالله السعيد</td>
+                                <td>2023</td>
+                                <td>قانون المرافعات</td>
+                                <td>247</td>
+                                <td>
+                                    <button class="btn-blue" style="padding: 0.25rem 0.5rem; font-size: 0.8rem;">عرض</button>
+                                    <button class="btn-green" style="padding: 0.25rem 0.5rem; font-size: 0.8rem;">تحميل</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>حكم محكمة الاستئناف في قضية الاختلاس</td>
+                                <td><span style="color: #48AD48;">حكم قضائي</span></td>
+                                <td>محكمة الاستئناف بالرياض</td>
+                                <td>2024-08-15</td>
+                                <td>القانون الجنائي</td>
+                                <td>189</td>
+                                <td>
+                                    <button class="btn-blue" style="padding: 0.25rem 0.5rem; font-size: 0.8rem;">عرض</button>
+                                    <button class="btn-green" style="padding: 0.25rem 0.5rem; font-size: 0.8rem;">تحميل</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>نموذج عقد التوريد التجاري</td>
+                                <td><span style="color: #9ECC3B;">نموذج قانوني</span></td>
+                                <td>وزارة التجارة</td>
+                                <td>2024</td>
+                                <td>القانون التجاري</td>
+                                <td>156</td>
+                                <td>
+                                    <button class="btn-blue" style="padding: 0.25rem 0.5rem; font-size: 0.8rem;">عرض</button>
+                                    <button class="btn-green" style="padding: 0.25rem 0.5rem; font-size: 0.8rem;">تحميل</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>دليل حقوق العمال في النظام السعودي</td>
+                                <td><span style="color: #2FA9E0;">دليل قانوني</span></td>
+                                <td>وزارة الموارد البشرية</td>
+                                <td>2024</td>
+                                <td>قانون العمل</td>
+                                <td>134</td>
+                                <td>
+                                    <button class="btn-blue" style="padding: 0.25rem 0.5rem; font-size: 0.8rem;">عرض</button>
+                                    <button class="btn-green" style="padding: 0.25rem 0.5rem; font-size: 0.8rem;">تحميل</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>قرار ديوان المظالم في نزاع عقاري</td>
+                                <td><span style="color: #48AD48;">قرار إداري</span></td>
+                                <td>ديوان المظالم</td>
+                                <td>2024-07-22</td>
+                                <td>القانون العقاري</td>
+                                <td>98</td>
+                                <td>
+                                    <button class="btn-blue" style="padding: 0.25rem 0.5rem; font-size: 0.8rem;">عرض</button>
+                                    <button class="btn-green" style="padding: 0.25rem 0.5rem; font-size: 0.8rem;">تحميل</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </section>
 
         <section id="legal-communications" class="content-section">
             <div class="page-header">
                 <h2><i class="fas fa-envelope"></i> التواصل القانوني</h2>
+                <div class="header-navigation">
+                    <div class="nav-item active">الرسائل الواردة</div>
+                    <div class="nav-item">الرسائل المرسلة</div>
+                    <div class="nav-item">إنشاء رسالة جديدة</div>
+                </div>
             </div>
-            <div class="placeholder-content">
-                <p>التواصل القانوني قيد التطوير</p>
+            
+            <div class="communications-container" style="padding: 2rem;">
+                <!-- Communications Statistics -->
+                <div class="dashboard-stats" style="margin-bottom: 2rem;">
+                    <div class="stat-card">
+                        <div class="stat-icon blue">
+                            <i class="fas fa-inbox"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h4>الرسائل الواردة</h4>
+                            <span class="stat-number">23</span>
+                            <div class="stat-detail">8 غير مقروءة</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon green">
+                            <i class="fas fa-paper-plane"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h4>الرسائل المرسلة</h4>
+                            <span class="stat-number">67</span>
+                            <div class="stat-detail">هذا الشهر</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon orange">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h4>رسائل في الانتظار</h4>
+                            <span class="stat-number">5</span>
+                            <div class="stat-detail">تحتاج رد</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon purple">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h4>جهات التراسل</h4>
+                            <span class="stat-number">34</span>
+                            <div class="stat-detail">جهة نشطة</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Actions -->
+                <div style="margin-bottom: 2rem;">
+                    <button class="btn-blue" style="margin-left: 1rem;">
+                        <i class="fas fa-plus"></i> رسالة جديدة
+                    </button>
+                    <button class="btn-green" style="margin-left: 1rem;">
+                        <i class="fas fa-reply"></i> رد سريع
+                    </button>
+                    <button class="btn-blue">
+                        <i class="fas fa-forward"></i> إعادة توجيه
+                    </button>
+                </div>
+
+                <!-- Messages List -->
+                <div class="cases-table-container">
+                    <table class="enhanced-cases-table">
+                        <thead>
+                            <tr>
+                                <th>المرسل</th>
+                                <th>الموضوع</th>
+                                <th>النوع</th>
+                                <th>التاريخ</th>
+                                <th>الأولوية</th>
+                                <th>الحالة</th>
+                                <th>الإجراءات</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr style="background: rgba(47, 169, 224, 0.05); font-weight: 600;">
+                                <td>المحكمة العامة بالرياض</td>
+                                <td>استدعاء حضور جلسة محاكمة - قضية رقم 1234</td>
+                                <td><span style="color: #EF4444;">رسمي</span></td>
+                                <td>2024-09-30 09:15</td>
+                                <td><span style="color: #EF4444;">عاجل</span></td>
+                                <td><span style="color: #2FA9E0;">غير مقروء</span></td>
+                                <td>
+                                    <button class="btn-blue" style="padding: 0.25rem 0.5rem; font-size: 0.8rem;">قراءة</button>
+                                    <button class="btn-green" style="padding: 0.25rem 0.5rem; font-size: 0.8rem;">رد</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>مكتب النيابة العامة</td>
+                                <td>طلب تقديم مستندات إضافية</td>
+                                <td><span style="color: #EF4444;">رسمي</span></td>
+                                <td>2024-09-29 14:30</td>
+                                <td><span style="color: #9ECC3B;">متوسط</span></td>
+                                <td><span style="color: #48AD48;">مقروء</span></td>
+                                <td>
+                                    <button class="btn-blue" style="padding: 0.25rem 0.5rem; font-size: 0.8rem;">عرض</button>
+                                    <button class="btn-green" style="padding: 0.25rem 0.5rem; font-size: 0.8rem;">رد</button>
+                                </td>
+                            </tr>
+                            <tr style="background: rgba(47, 169, 224, 0.05); font-weight: 600;">
+                                <td>العميل - شركة النور التجارية</td>
+                                <td>استفسار حول سير القضية التجارية</td>
+                                <td><span style="color: #2FA9E0;">عميل</span></td>
+                                <td>2024-09-29 11:45</td>
+                                <td><span style="color: #2FA9E0;">عادي</span></td>
+                                <td><span style="color: #2FA9E0;">غير مقروء</span></td>
+                                <td>
+                                    <button class="btn-blue" style="padding: 0.25rem 0.5rem; font-size: 0.8rem;">قراءة</button>
+                                    <button class="btn-green" style="padding: 0.25rem 0.5rem; font-size: 0.8rem;">رد</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>نقابة المحامين</td>
+                                <td>دعوة لحضور ورشة عمل قانونية</td>
+                                <td><span style="color: #9ECC3B;">إعلان</span></td>
+                                <td>2024-09-28 16:20</td>
+                                <td><span style="color: #2FA9E0;">عادي</span></td>
+                                <td><span style="color: #48AD48;">مقروء</span></td>
+                                <td>
+                                    <button class="btn-blue" style="padding: 0.25rem 0.5rem; font-size: 0.8rem;">عرض</button>
+                                </td>
+                            </tr>
+                            <tr style="background: rgba(47, 169, 224, 0.05); font-weight: 600;">
+                                <td>ديوان المظالم</td>
+                                <td>إشعار بتحديد موعد جلسة الاستئناف</td>
+                                <td><span style="color: #EF4444;">رسمي</span></td>
+                                <td>2024-09-28 08:30</td>
+                                <td><span style="color: #EF4444;">عاجل</span></td>
+                                <td><span style="color: #2FA9E0;">غير مقروء</span></td>
+                                <td>
+                                    <button class="btn-blue" style="padding: 0.25rem 0.5rem; font-size: 0.8rem;">قراءة</button>
+                                    <button class="btn-green" style="padding: 0.25rem 0.5rem; font-size: 0.8rem;">رد</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Compose New Message -->
+                <div class="form-section" style="margin-top: 2rem;">
+                    <h3 style="color: var(--brand-deep-navy); margin-bottom: 1rem;">
+                        <i class="fas fa-edit"></i> إنشاء رسالة جديدة
+                    </h3>
+                    <div class="form-row">
+                        <div class="form-field">
+                            <label>المرسل إليه</label>
+                            <select class="form-input">
+                                <option>اختر جهة التراسل</option>
+                                <option>المحكمة العامة بالرياض</option>
+                                <option>محكمة الاستئناف</option>
+                                <option>مكتب النيابة العامة</option>
+                                <option>ديوان المظالم</option>
+                                <option>نقابة المحامين</option>
+                                <option>عميل جديد</option>
+                            </select>
+                        </div>
+                        <div class="form-field">
+                            <label>نوع الرسالة</label>
+                            <select class="form-input">
+                                <option>رسالة عادية</option>
+                                <option>طلب رسمي</option>
+                                <option>رد على استفسار</option>
+                                <option>تقديم مستندات</option>
+                                <option>طلب موعد</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-field">
+                        <label>الموضوع</label>
+                        <input type="text" class="form-input" placeholder="أدخل موضوع الرسالة">
+                    </div>
+                    <div class="form-field">
+                        <label>محتوى الرسالة</label>
+                        <textarea class="form-input" rows="6" placeholder="اكتب محتوى الرسالة هنا..."></textarea>
+                    </div>
+                    <div class="form-actions">
+                        <button class="btn-blue"><i class="fas fa-paper-plane"></i> إرسال</button>
+                        <button class="btn-green"><i class="fas fa-save"></i> حفظ كمسودة</button>
+                        <button class="btn-red"><i class="fas fa-paperclip"></i> إرفاق ملفات</button>
+                    </div>
+                </div>
             </div>
         </section>
     </main>
 
     <script src="legal-system-enhanced.js"></script>
+    <script>
+        // Backup hamburger menu function
+        window.addEventListener('DOMContentLoaded', function() {
+            const hamburgerBtn = document.getElementById('hamburgerBtn');
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('navOverlay');
+            
+            if (hamburgerBtn) {
+                hamburgerBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    console.log('Hamburger clicked!');
+                    
+                    if (sidebar) {
+                        const isOpen = sidebar.classList.contains('open');
+                        if (isOpen) {
+                            sidebar.classList.remove('open');
+                            overlay?.classList.remove('active');
+                            hamburgerBtn.classList.remove('active');
+                            document.body.style.overflow = '';
+                        } else {
+                            sidebar.classList.add('open');
+                            overlay?.classList.add('active');
+                            hamburgerBtn.classList.add('active');
+                            document.body.style.overflow = 'hidden';
+                        }
+                    }
+                });
+            }
+        });
+    </script>
 </body>
 </html>

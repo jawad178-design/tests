@@ -821,13 +821,57 @@ function setupEventListeners() {
         }
     });
     
-    // Handle mobile menu toggle
-    const menuToggle = document.querySelector('.menu-toggle');
-    if (menuToggle) {
-        menuToggle.addEventListener('click', function() {
-            document.querySelector('.sidebar').classList.toggle('open');
+    // Handle mobile menu toggle - updated for hamburger menu
+    const hamburgerBtn = document.getElementById('hamburgerBtn');
+    const navOverlay = document.getElementById('navOverlay');
+    
+    if (hamburgerBtn) {
+        hamburgerBtn.addEventListener('click', function() {
+            toggleSidebar();
         });
     }
+    
+    if (navOverlay) {
+        navOverlay.addEventListener('click', function() {
+            closeSidebar();
+        });
+    }
+    
+    // Close sidebar when navigation link is clicked on mobile
+    const navLinks = document.querySelectorAll('.nav-link');
+    navLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            if (window.innerWidth <= 1024) {
+                closeSidebar();
+            }
+        });
+    });
+    
+    // Close sidebar with ESC key (mobile only)
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && window.innerWidth <= 1024) {
+            const sidebar = document.getElementById('sidebar');
+            if (sidebar && sidebar.classList.contains('open')) {
+                closeSidebar();
+            }
+        }
+    });
+    
+    // Handle window resize
+    window.addEventListener('resize', function() {
+        const sidebar = document.getElementById('sidebar');
+        if (window.innerWidth > 1024) {
+            // On desktop, remove mobile classes but keep sidebar visible
+            if (sidebar) {
+                sidebar.classList.remove('open');
+            }
+            const navOverlay = document.getElementById('navOverlay');
+            const hamburgerBtn = document.getElementById('hamburgerBtn');
+            if (navOverlay) navOverlay.classList.remove('active');
+            if (hamburgerBtn) hamburgerBtn.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+    });
 }
 
 function handleFormSubmission(form) {
@@ -991,6 +1035,239 @@ console.log('📋 البيانات المحفوظة:', {
     sessions: sessionsData.length
 });
 
+// Hamburger Menu Functions
+function toggleSidebar() {
+    // Only allow toggle on mobile devices
+    if (window.innerWidth > 1024) {
+        return;
+    }
+    
+    const sidebar = document.getElementById('sidebar');
+    const navOverlay = document.getElementById('navOverlay');
+    const hamburgerBtn = document.getElementById('hamburgerBtn');
+    
+    console.log('Toggle sidebar called', { sidebar: !!sidebar, navOverlay: !!navOverlay, hamburgerBtn: !!hamburgerBtn });
+    
+    if (sidebar && navOverlay && hamburgerBtn) {
+        const isOpen = sidebar.classList.contains('open');
+        
+        if (isOpen) {
+            closeSidebar();
+        } else {
+            openSidebar();
+        }
+    } else {
+        console.error('Missing sidebar elements:', { sidebar: !!sidebar, navOverlay: !!navOverlay, hamburgerBtn: !!hamburgerBtn });
+    }
+}
+
+function openSidebar() {
+    const sidebar = document.getElementById('sidebar');
+    const navOverlay = document.getElementById('navOverlay');
+    const hamburgerBtn = document.getElementById('hamburgerBtn');
+    
+    if (sidebar && navOverlay && hamburgerBtn) {
+        sidebar.classList.add('open');
+        navOverlay.classList.add('active');
+        hamburgerBtn.classList.add('active');
+        
+        // Prevent body scroll when sidebar is open
+        document.body.style.overflow = 'hidden';
+        
+        console.log('Sidebar opened successfully');
+    }
+}
+
+function closeSidebar() {
+    const sidebar = document.getElementById('sidebar');
+    const navOverlay = document.getElementById('navOverlay');
+    const hamburgerBtn = document.getElementById('hamburgerBtn');
+    
+    if (sidebar && navOverlay && hamburgerBtn) {
+        sidebar.classList.remove('open');
+        navOverlay.classList.remove('active');
+        hamburgerBtn.classList.remove('active');
+        
+        // Restore body scroll
+        document.body.style.overflow = '';
+        
+        console.log('Sidebar closed successfully');
+    }
+}
+
+// Make functions globally available for HTML onclick handlers
+window.toggleSidebar = toggleSidebar;
+window.openSidebar = openSidebar;
+window.closeSidebar = closeSidebar;
+
+// Notification System Functions
+function markAllAsRead() {
+    const notifications = document.querySelectorAll('.notification-item.unread');
+    notifications.forEach(notification => {
+        notification.classList.remove('unread');
+        notification.classList.add('read');
+        
+        // Update visual appearance
+        notification.style.opacity = '0.8';
+        notification.style.background = 'var(--bg-light)';
+        
+        // Update status badge
+        const statusBadge = notification.querySelector('.notification-status');
+        if (statusBadge) {
+            statusBadge.textContent = 'مقروء';
+            statusBadge.style.background = 'var(--support-green)';
+        }
+        
+        // Update action button
+        const markReadBtn = notification.querySelector('button');
+        if (markReadBtn && markReadBtn.textContent.includes('علامة مقروء')) {
+            markReadBtn.textContent = 'أرشفة';
+            markReadBtn.className = 'btn-green';
+            markReadBtn.onclick = () => archiveNotification(notification);
+        }
+    });
+    
+    // Update statistics
+    updateNotificationStats();
+    showNotification('تم وضع علامة مقروء على جميع التبليغات', 'success');
+}
+
+function filterUrgent() {
+    const notifications = document.querySelectorAll('.notification-item');
+    notifications.forEach(notification => {
+        if (notification.classList.contains('urgent')) {
+            notification.style.display = 'block';
+        } else {
+            notification.style.display = 'none';
+        }
+    });
+    showNotification('تم عرض التبليغات العاجلة فقط', 'info');
+}
+
+function archiveRead() {
+    const readNotifications = document.querySelectorAll('.notification-item.read');
+    readNotifications.forEach(notification => {
+        notification.style.animation = 'slideOut 0.3s ease-out';
+        setTimeout(() => {
+            notification.remove();
+        }, 300);
+    });
+    
+    updateNotificationStats();
+    showNotification(`تم أرشفة ${readNotifications.length} تبليغ مقروء`, 'success');
+}
+
+function createNotification() {
+    showNotification('سيتم إضافة نافذة إنشاء التبليغات قريباً', 'info');
+}
+
+function archiveNotification(notificationElement) {
+    notificationElement.style.animation = 'slideOut 0.3s ease-out';
+    setTimeout(() => {
+        notificationElement.remove();
+        updateNotificationStats();
+        showNotification('تم أرشفة التبليغ', 'success');
+    }, 300);
+}
+
+function markAsRead(notificationElement) {
+    notificationElement.classList.remove('unread');
+    notificationElement.classList.add('read');
+    
+    // Update visual appearance
+    notificationElement.style.opacity = '0.8';
+    notificationElement.style.background = 'var(--bg-light)';
+    
+    // Update status badge
+    const statusBadge = notificationElement.querySelector('.notification-status');
+    if (statusBadge) {
+        statusBadge.textContent = 'مقروء';
+        statusBadge.style.background = 'var(--support-green)';
+    }
+    
+    updateNotificationStats();
+    showNotification('تم وضع علامة مقروء على التبليغ', 'success');
+}
+
+function updateNotificationStats() {
+    const unreadNotifications = document.querySelectorAll('.notification-item.unread');
+    const urgentNotifications = document.querySelectorAll('.notification-item.urgent.unread');
+    const totalNotifications = document.querySelectorAll('.notification-item');
+    
+    // Update statistics in the dashboard stats
+    const unreadStat = document.querySelector('.stat-card .stat-info h4');
+    if (unreadStat && unreadStat.textContent === 'غير المقروءة') {
+        const unreadNumber = unreadStat.parentElement.querySelector('.stat-number');
+        if (unreadNumber) {
+            unreadNumber.textContent = unreadNotifications.length;
+        }
+    }
+    
+    const urgentStat = document.querySelector('.stat-card .stat-info h4');
+    if (urgentStat && urgentStat.textContent === 'التبليغات العاجلة') {
+        const urgentNumber = urgentStat.parentElement.querySelector('.stat-number');
+        if (urgentNumber) {
+            urgentNumber.textContent = urgentNotifications.length;
+        }
+    }
+}
+
+function showNotification(message, type = 'info') {
+    // Create notification element
+    const notification = document.createElement('div');
+    notification.className = `notification ${type}`;
+    notification.innerHTML = `
+        <div class="notification-content">
+            <div class="notification-message">${message}</div>
+            <button class="notification-close" onclick="closeNotification(this)">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+    `;
+    
+    // Add to document
+    document.body.appendChild(notification);
+    
+    // Show notification
+    setTimeout(() => {
+        notification.classList.add('show');
+    }, 100);
+    
+    // Auto hide after 3 seconds
+    setTimeout(() => {
+        closeNotification(notification.querySelector('.notification-close'));
+    }, 3000);
+}
+
+function closeNotification(closeBtn) {
+    const notification = closeBtn.closest('.notification');
+    notification.classList.remove('show');
+    setTimeout(() => {
+        notification.remove();
+    }, 300);
+}
+
+// Add slideOut animation styles
+const style = document.createElement('style');
+style.textContent = `
+    @keyframes slideOut {
+        0% { transform: translateX(0); opacity: 1; }
+        100% { transform: translateX(100%); opacity: 0; }
+    }
+`;
+document.head.appendChild(style);
+
+// Make notification functions globally available
+window.markAllAsRead = markAllAsRead;
+window.filterUrgent = filterUrgent;
+window.archiveRead = archiveRead;
+window.createNotification = createNotification;
+window.archiveNotification = archiveNotification;
+window.markAsRead = markAsRead;
+window.updateNotificationStats = updateNotificationStats;
+window.showNotification = showNotification;
+window.closeNotification = closeNotification;
+
 // Export functions for external use
 window.LegalSystem = {
     showSection,
@@ -1001,5 +1278,17 @@ window.LegalSystem = {
     exportCasesReport,
     printCurrentSection,
     searchCases,
-    filterCasesByStatus
+    filterCasesByStatus,
+    toggleSidebar,
+    openSidebar,
+    closeSidebar,
+    markAllAsRead,
+    filterUrgent,
+    archiveRead,
+    createNotification,
+    archiveNotification,
+    markAsRead,
+    updateNotificationStats,
+    showNotification,
+    closeNotification
 };
